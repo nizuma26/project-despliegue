@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Inventario x Incorporación</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            /*sup derecho  inferior  izquierdo */
+            margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+            ;
+        }
+        body {
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            color: black;
+        }
+        .name-company {
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .name-footer {
+            font-size: 20px;
+            padding-top: 0;
+            margin-top: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .tblguiapdf {
+                         
+            padding: 1px;
+                         
+        }
+        .tblguiapdf thead tr {
+            vertical-align: middle !important;
+            border: 1px solid #030303 !important;
+            padding: 3px;
+        /*  border-bottom: 0px;*/
+           
+            /*  border-color: black; */
+        }
+
+        .tblguiapdf tbody tr td {
+            vertical-align: middle !important;
+            border: 1px solid #030303;
+            padding: 3px;
+
+            /*border-color: #141414;
+
+
+            /* border-left: 0px;
+            border-right: 0px; */
+
+        }
+        .tblguiapdf tfoot tr td {
+            border: 1px solid #030303;
+            padding: 3px;
+
+            /*border-color: #141414;
+
+
+            /* border-left: 0px;
+            border-right: 0px; */
+
+        }
+
+        .img-logo {
+            margin-top: 10px;
+            width: 700px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>    
+    <div class="container-fluid border border-dark pl-0 pr-0 pb-0" style="height: 750px; width: 1070px; border-radius:10px;">
+        <img src="{% static 'img/newlogompps.png' %}" class="img-fluid d-block mx-auto img-logo">
+        <h1 class="name-company">{{ comp.name }}</h1>
+        <p class="text-center" style="font-size: 14px;">
+            {{ comp.address }}<br>
+            RIF: {{ comp.rif }} ==> {{ comp.tlf }}<br>
+            Redes Sociales:  {{ comp.redsocial }}<br>
+        </p>
+
+        <p class="text-center" style="font-size: 14px;">
+                Proveedor : <span style="font-weight: bold;">{{ encab_ing.proveedor.empresa }}</span>
+        </p>
+        <div class="row p-0 mb-0">
+            <div class="col-3 p-0 float-right ml-3">
+                <div class="form-group clearfix">
+                    <div class="d-inline">
+                        <span style="font-weight: bold; margin-left: 10px;">CODIGO: </span>  <span class="rounded-pill" style="background-color: #eeeeee; font-size: 14px; color: red; text-align: center; padding: 6px;"> {{ encab_ing.cod_ingreso }} </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-0" style="font-size: 12px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+              <div class="form-group clearfix">
+                <div class="d-inline">
+                    <span style="font-weight: bold;">Fecha: </span> {{ encab_ing.fecha_ingreso }}
+                </div>
+                <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Tipo de Incorporación: </span> {{ encab_ing.tipo_ingreso }}
+                 </div>
+                
+                <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">T.Comprob: </span> {{ encab_ing.tipo_comprob }}
+                 </div>
+                 <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Nº Comprob: </span> {{ encab_ing.num_comprob }}
+                 </div>
+
+              </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 12px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+                <div class="form-group clearfix">
+                  <div class="d-inline">
+                      <span style="font-weight: bold;">Almacén: </span> {{ encab_ing.almacen.nombre }}
+                  </div>
+                  <div class="d-inline" style="margin-left: 20px;">
+                     <span style="font-weight: bold;">Jefe de Deposito: </span> {{ encab_ing.almacen.responsable }}
+                  </div>
+                  <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Usuario: </span> {{ encab_ing.usuario }}
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 12px; margin-left: -6px; margin-top: -12px; margin-bottom: 10px;">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm">
+                    <span style="font-weight: bold;">Observación: </span>
+                    <div class="input-group">
+                        {{ encab_ing.observ }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <table class="tblguiapdf table" style="font-size: 11px;">
+            <thead>
+                <tr style="text-align: center;  border: #030303">
+                    <th style="width: 300px;">PRODUCTO</th>
+                    <th style="width: 320px;">DESCRIPCION</th>
+                    <th style="width: 70px;">PRECIO</th>
+                    <th style="width: 70px;">CANTIDAD</th>
+                    <th style="width: 80px;">SUB-TOTAL</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for det in detalle_ing %}
+                <tr>
+                    <td>{{ det.prod.codigo }} - {{ det.prod.nombre }}</td>
+                    <td>{{ det.prod.descripcion }} - {{ det.prod.marca }}</td>
+                    <td class="text-right">{{ det.precio|floatformat:2 }}</td>
+                    <td class="text-right">{{ det.cant}}</td>
+                    <td class="text-right">{{ det.subtotal|floatformat:2 }}</td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right" style="border-bottom: 0px;"><b>Subtotal</b></td>
+                    <td class="text-right">{{ encab_ing.subtotal|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right" style="border-top: 0px; border-bottom: 0px;"><b>Iva %</b></td>
+                    <td class="text-right">{{ encab_ing.iva|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right" style="border-top: 0px;"><b>Total</b></td>
+                    <td class="text-right">{{ encab_ing.total|floatformat:2 }}</td>
+                </tr>
+                <td colspan="5">
+                    <h3 class="name-footer">
+                        <br>                        
+                        Total de productos: {{ encab_ing.detingresoproduc_ingresopro_set.all.count }}
+                    </h3>
+                    
+                </td>
+            </tfoot>
+        </table>        
+    </div>
+    </body>
+    </html>

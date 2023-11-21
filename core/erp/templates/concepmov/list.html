@@ -1,0 +1,27 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col" style="width: 5%;">Codigo</th>
+        <th scope="col" style="width: 50%;">Denominacion</th>
+        <th scope="col" style="width: 15%;">Estado</th>
+        <th scope="col" style="width: 15%;">Tipo de Movimiento</th>
+        <th scope="col" style="width: 15%;">opciones</th>
+        
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'concepmov/modal_addconcepmov.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'concepmov/js/list.js' %}"></script>
+{% endblock %}

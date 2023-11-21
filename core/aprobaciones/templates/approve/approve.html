@@ -1,0 +1,54 @@
+{% load static %}
+<div class="modal fade" id="modalManageState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <form id="manage_state" action="." method="post" data-url="{{url}}">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul
+                        class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="manage_state_title">
+                            <b><i class="fas fa-pen"></i> <span> gg </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="id" id="id" type="hidden" value="{{object.id}}">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="text-muted">Cambiar estado</label>
+                                    <select required class="form-control f-13" name="estado" id="estado">
+                                        <option value="{{options.APR}}">Aprobar</option>
+                                        <option value="{{options.REC}}">Rechazar</option>
+                                        <option value="{{options.RET}}">Retornar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="text-muted">Motivo</label>
+                                    <textarea class="form-control f-13" placeholder="Ingrese el motivo del cambio de estado"
+                                        name="motive" id="motive" rows="6" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-sm btn-bord"><i class="fas fa-save"></i>
+                        Guardar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i>
+                        Salir</button>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</form>
+</div>

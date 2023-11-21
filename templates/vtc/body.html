@@ -1,0 +1,124 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block body %}
+<body class="hold-transition sidebar-mini {{customize.sidebar_collapse}} {{customize.sidebar_fixed}}" id="control_body">
+    <div class="wrapper">
+        <!-- Preloader -->
+        <!-- <div class="preloader flex-column justify-content-center align-items-center">
+            <h3><div class="spinner" id="spinner"></div> </h3>
+        </div> -->
+        {% include 'vtc/header.html' %}
+        {% include 'vtc/sidebar.html' %}
+        <div class="content-wrapper" main-color="{{customize.main_theme}}" id="main_color">
+            <div class="content-header pb-2">
+                <div class="container-fluid">
+                    <div class="row mb-1">
+                        {% block title %}
+                        <div class="col-sm-6">
+                            <h3 class="title-form">
+                                {% if action == 'add' %}	
+                                    <span class="badge main_theme badge-rounded"><i class="fas fa-plus-circle"></i></span>			
+                                {% else %}
+                                    <span class="badge main_theme badge-rounded mt-1"><i class="fas fa-pen"></i></span>		
+                                {% endif %}
+                                <span style="vertical-align: middle;">{{title}}</span>
+                            </h3>
+                        </div>
+                        {% endblock title %}
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                {% if btn_name %}
+
+                                {% if create_url %}
+                                    <li class="breadcrumb-item"><a href="{{ create_url }}"
+                                    class="btn btn-sm ml-2 btnAdd text-white"><i class="fas fa-plus-circle" style="color:#fff"> </i> {{btn_name }}</a></li>
+                                {% else %}
+                                    <li class="breadcrumb-item"><a class="btn btn-sm ml-2 btnAdd text-white"><i class="fas fa-plus-circle" style="color:#ffffff"></i> {{btn_name }}</a></li>
+                                {% endif %}
+
+                                {% else %}
+
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{% url 'index_app:Index' %}"
+                                                class="text-muted"><i class="fas fa-house-user"></i> Inicio</a></li>
+                                        <li class="breadcrumb-item active"><a href="{{ list_url }}" class="text-muted">
+                                                {{ entity }}</a></li>
+                                        </li>
+                                    </ol>
+                                </nav>
+                                {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="content fade_down_animation">
+                <div class="container-fluid">
+                    {% block content %}
+
+                    {% endblock content %}
+                </div>
+            </section>
+            <button class="custom_interface" data-widget="control-sidebar" data-controlsidebar-slide="true" role="button">
+                <i class="fas fa-cog"></i>
+            </button>
+            {% include 'vtc/panel_control.html' %}
+            <div class="row">
+                <div class="col-lg-5">
+                    {% include 'chat.html' %}
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+
+    </div>
+    <!-- jQuery -->
+    <script src="{% static 'lib/jquery/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/vtc_nav_link_active.js' %}" type="text/javascript"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>  
+    <!-- AdminLTE App -->
+    <script src="{% static 'lib/adminlte3.1.0/dist/js/adminlte.min.js' %}" type="text/javascript"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}" type="text/javascript"></script>
+    <!-- moment -->
+    <script src="{% static 'lib/moment/moment.min.js' %}" type="text/javascript"></script>
+    <!-- SweetAlert2 -->
+    <script src="{% static 'lib/sweetalert2-9.10.0/sweetalert2@11.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/jquery-confirm-v3.3.4/jquery-confirm.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/functions.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/notifications.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/chat.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/panel_control.js' %}" type="text/javascript"></script>
+    <script>
+        function abrir_modal_usuario() {
+            $("#detalle_usuario").modal("show");
+            $('#perfil_user').find('i').removeClass().addClass('fas fa-id-card-alt');
+        }
+        function cerrar_modal_usuario() {
+            $("#detalle_usuario").modal("hide");
+        }
+    </script>
+    {% block javascript %}
+
+    {% endblock javascript %}    
+    <script>
+        {% if messages %}
+            let html = '<p>';
+            {% for message in messages %}
+                html += '{{ message }}<br>';
+            {% endfor %}
+            html += '</p>';
+            Swal.fire({
+                title: 'Error!',
+                html: html,
+                icon: 'error'
+            });
+        {% endif %}
+    </script>
+
+</body>
+
+{% endblock body %}

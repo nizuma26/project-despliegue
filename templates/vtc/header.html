@@ -1,0 +1,69 @@
+<nav class="main-header navbar navbar-expand shadow-sm border-0" id="navbar_control" navbar-theme="{{customize.navbar_theme}}">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" role="button">
+          <i class="fas fa-expand"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+          <a class="nav-link notify_unread btnNot" id="btnNot" type="button">
+            <i class="far fa-bell"></i>          
+            <span class="badge badge-secondary badge-pill f-14 navbar-badge number_ntf"></span>
+          </a>       
+          {% include 'notifications.html' %}
+        </div>
+  
+      </li>
+      <li class="nav-item dropdown">
+  
+        <!-- cerrar sesion Dropdown Menu -->
+      <li class="nav-item dropdown">
+      <li class="dropdown user user-menu">
+        <a href="#" class="nav-link btnPanel  dropdown-toggle" data-toggle="dropdown">
+          <img src="{{request.user.get_image}}" class="user-image bg-light" style="width: 27px; height: 27px;" alt="User Image">
+          <span class="hidden-xs">{{request.user.get_full_name}}</span>
+        </a>
+        <ul class="dropdown-menu shadow border-0 dropdown-animation user_panel" style="margin-top: 9px;">
+          <!-- User image -->
+          <li class="user-header">
+            <img src="{{request.user.get_image}}" class="img-circle bg-light" alt="User Image">
+            <p>
+              {{request.user.get_full_name}}
+              <small>{{request.user.last_login}}</small>
+            </p>
+          </li>
+          <!-- Menu Body -->
+          <li class="user-body text-sm">
+            <div class="row">
+              <div class="col-sm-4 text-center">
+                <a href="{% url 'user:user_profile' %}">Editar Perfil</a>
+              </div>
+              <div class="col-sm-4 text-center">
+                <a href="{% url 'user:user_change_password' %}">Cambiar Contraseña</a>
+              </div>
+              <div class="col-sm-4 text-center">
+                <a>Bandeja de Entrada</a>
+              </div>
+            </div>
+            <!-- /.row -->
+          </li>
+          <!-- Menu Footer-->
+          <li class="user-footer text-sm">
+            <div class="float-sm-left">
+              <a class="btn btn-default text-secondary" onclick="abrir_modal_usuario()">Ver Perfil</a>
+            </div>
+            <div class="float-sm-right">
+              <a href="{% url 'usuarios_app:logout' %}" class="btn btn-default text-secondary">Salir</a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      </li>
+    </ul>
+  </nav>

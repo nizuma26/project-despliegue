@@ -1,0 +1,49 @@
+{% extends 'report.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-lg-6">
+</div>
+{% endblock %}
+
+{% block report_content %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary input-flat btnSearch" type="button">
+                        <i class="fas fa-sort-amount-down"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="scroll-h">
+    <table class="table table-bordered max-cont table-hover table-sm" width="100%" style="font-size: 11px;"
+        id="dtt_Report_Ingre">
+        <thead>
+            <tr>
+                <th scope="col">PRODUCTOS</th>
+                <th scope="col">DESCRIPCION</th>
+                <th scope="col">TIPO INCORPORACIÓN</th>
+                <th scope="col">FECHA</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col">CANTIDAD</th>
+                <th scope="col">IVA</th>
+                <th scope="col">SUBTOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascript_report %}
+<script src="{% static 'reporte_ingreso/js/report.js' %}"></script>
+{% endblock %}

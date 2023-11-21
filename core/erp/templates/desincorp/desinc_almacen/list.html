@@ -1,0 +1,94 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+<tr style="font-size: 12px;">
+    <th scope="col" style="width: 3%;">Nº</th>
+    <th scope="col" style="width: 13%;">CÓDIGO</th>
+    <th scope="col" style="width: 28%;">TIPO DE DESCINCORPORACIÓN</th>
+    <th scope="col" style="width: 25%;">ALMACÉN</th>
+    <th scope="col" style="width: 10%;">FECHA.</th>
+    <th scope="col" style="width: 8%;">STATUS</th>
+    <th scope="col" style="width: 13%;">OPCIONES</th>
+</tr>
+{% endblock %}
+
+{% block add_modales %}
+<div class="modal fade" id="desinc_prod_almacen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <form id="frmDetProdDesincorp" action="." method="post">
+        <div class="modal-dialog modal-xl cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul
+                        class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="title_desinc">
+                            <b><i class="fas fa-search"></i> <span> gg </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-h">
+                        <table class="table max-cont table-hover table-sm" id="tblDetalleProdDesincorp" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCTO</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>PRECIO</th>
+                                    <th>CANTIDAD</th>
+                                    <th>SUBTOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 12px;">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                    <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i>
+                        Salir</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block content_list_before %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <div class="custom-dropdown" id="dropdown-content">
+                        <button class="btn btn-primary input-flat dropdown-btn" id="dropdown-button"  type="button">
+                            <i class="fas fa-sort-amount-down"></i>
+                            Filtrar 
+                        </button>
+                        <ul class="dropdown__menu dropdown__right">
+                            <li class="dropdown__item">                              
+                               <a class="dropdown__name btnSearch">  <i class="fas fa-calendar-check"></i> Por rangos de fechas</a>
+                            </li>
+                            <li class="dropdown__item">
+                               <a class="dropdown__name btnSearchAll"><i class="fas fa-globe"></i> Ver todos los registros</a>
+                            </li>
+                         </ul> 
+                    </div>                                             
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/daterangepicker/daterangepicker.js' %}" type="text/javascript"></script>
+<script src="{% static 'desincorp/desinc_almacen/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}

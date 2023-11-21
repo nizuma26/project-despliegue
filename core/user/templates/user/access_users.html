@@ -1,0 +1,41 @@
+{% load static %}
+<div class="modal fade" id="access_users" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg cascading-modal mt-5" role="document">
+		<div class="modal-content">
+			<div class="modal-c-header">      
+                <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                    <h6 class="modal-title md-h title-custom text-white" id="access_user">
+                        <b><i class="fas fa-info-circle"></i> <span>  Accesos de Usuario                   </span></b>
+                    </h6>
+                </ul> 
+            </div>
+			<div class="modal-body">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="scroll-h">                                
+                                <table class="table max-cont table-hover table-sm" id="tblAccessUsers" >
+                                    <thead>
+                                    <tr style="line-height: 12px;">
+                                        <th scope="col">FECHA</th>
+                                        <th scope="col">HORA</th>
+                                        <th scope="col">IP</th>
+                                        <th scope="col">NAVEGADOR</th>
+                                        <th scope="col">DISPOSITIVO</th>
+                                        <th scope="col">TIPO DE ACCESO</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="font-size: 13px;">
+                                    </tbody>
+                                </table>                                                                    
+                            </div>                                               
+                        </div>
+                    </div>
+                </div>                                                   
+            </div>
+            <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button>      
+            </div>														
+		</div>                      
+	</div>
+</div>

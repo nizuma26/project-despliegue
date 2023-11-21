@@ -1,0 +1,44 @@
+{% load static %}
+<div class="modal fade" id="myModalStatusDes" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="frmStatusDes" action="."  method="post" style="line-height: 12px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-1" style="background-color: #6c8ba8;">
+                <h5 class="modal-title" id="modaltitle2" style="color:white;">
+                        <b><i class="fas fa-user-plus"></i>  <span>  gg </span></b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="action" type="hidden" value="edit">
+                        <input name="id" id="id" type="hidden" value="0">
+                        <div class="col mx-1">
+                            <div class="row"> 
+                                <div class="col-12"> 
+                                    <div class="form-group mb-2">
+                                        <label for="estado" class="control-label text-muted" style="margin-bottom: 3px; padding-block-end: 10px;">Cambiar Estado</label>                                       
+                                        <select class="form-control input-flat custom-select-sm" name="estado" id="estado_desinc" style="font-size: 12px;">
+                                            <option value="DIS">En Creación</option>
+                                            <option value="APR">Aprobado</option>
+                                            <option value="REC">Rechazado</option>
+                                        </select>
+                                        </div>
+                                    </div>    
+                                </div>    
+                            </div>   
+                        </div>
+                    
+                    </div>
+                    <div class="modal-footer py-1 text-center">
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-right:  200px;"><i class="fas fa-save"></i> Guardar</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>

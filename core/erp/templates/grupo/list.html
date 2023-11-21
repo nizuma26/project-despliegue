@@ -1,0 +1,25 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col" style="width: 10%;">Nº</th>
+        <th scope="col" style="width: 12%;">Codigo</th>
+        <th scope="col" style="width: 68%;">Nombre</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'grupo/modal_addgrupo.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'grupo/js/list.js' %}"></script>
+{% endblock %}

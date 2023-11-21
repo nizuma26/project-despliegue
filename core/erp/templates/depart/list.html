@@ -1,0 +1,26 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 10%;">Nro</th>
+        <th scope="col" style="width: 75%;">Nombre</th>
+        <th scope="col" style="width: 15%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block add_modales %}
+    <div>
+        {% include 'depart/modal_adddepart.html' %}
+    </div>
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'depart/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}

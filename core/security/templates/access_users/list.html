@@ -1,0 +1,211 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom_tabs.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card main_border_top fade_down_animation">
+            <div class="card-header border-0">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item mr-2">
+                        <a type="button" class="nav-link active btn-effect" id="btn_access" data-target="#nav_access"
+                            href="#" data-toggle="tab" role="tab" aria-controls="nav_access" aria-selected="false"><i
+                                class="fas fa-user-shield"></i> Accesos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="nav-link btn-effect" id="btn_activity" data-target="#nav_activity"
+                            href="#" data-toggle="tab" role="tab" aria-controls="nav_activity" aria-selected="true"><i
+                                class="fas fa-clipboard-list"></i>
+                            Histórico</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body pl-4 pr-4">
+                <br>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav_access" role="tabpanel"
+                        aria-labelledby="nav-access-tab">
+                        <div class="row">
+                            <div class="col-md-4 mr-3">
+                                <div class="form-group">
+                                    <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+                                    <div class="input-group">
+                                        {{ form.date_range }}
+                                        <div class="input-group-append">
+                                            <div class="custom-dropdown" id="dropdown-content">
+                                                <button class="btn btn-primary input-flat dropdown-btn"
+                                                    id="dropdown-button" type="button">
+                                                    <i class="fas fa-sort-amount-down"></i>
+                                                    Filtrar
+                                                </button>
+                                                <ul class="dropdown__menu dropdown__right">
+                                                    <li class="dropdown__item">
+                                                        <a class="dropdown__name btnSearch"> <i
+                                                                class="fas fa-calendar-check"></i> Por rangos de
+                                                            fechas</a>
+                                                    </li>
+                                                    <li class="dropdown__item">
+                                                        <a class="dropdown__name btnSearchAll"><i
+                                                                class="fas fa-globe"></i> Ver todos los registros</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-4">
+                                <div class="form-group text-secondary">           
+                                    <div class="custom-dropdown" id="dropdown_content_access">
+                                        <button class="dropdown-btn-2" id="dropdown_button_access"  type="button">
+                                            <i class="fas fa-bolt dropdown__icon"></i>
+                                            Acciones Rapidas 
+                                            <div class="dropdown__icons">
+                                                <i class="fas fa-chevron-down dropdown__arrow"></i>
+                                                <i class="fas fa-times dropdown__close"></i>
+                                             </div>
+                                        </button>
+                                        <ul class="dropdown__menu dropdown__center">                                            
+                                            <li class="dropdown__item access delete_access">
+                                                <a class="dropdown__name"><i class="fas fa-trash dropdown__icon"></i> Eliminar</a>
+                                             </li>
+                                         </ul> 
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="scroll-h">
+                                    <table id="data_access" class="table table-hover max-cont table-sm" width="100%">
+                                        <thead class="upper-text">
+                                            <tr>
+                                                <th scope="col"><label class="checkbox-container"><input type="checkbox"
+                                                    id="checkAllAccess" name="checkAllAccess"><span
+                                                    class="checkmark"></span></label></th>
+                                                <th scope="col">Nº</th>
+                                                <th scope="col">USUARIO</th>
+                                                <th scope="col">FECHA DE REGISTRO</th>
+                                                <th scope="col">HORA</th>
+                                                <th scope="col">DIRECCIÓN IP</th>
+                                                <th scope="col">NAVEGADOR</th>
+                                                <th scope="col">DISPOSITIVO</th>
+                                                <th scope="col">TIPO DE ACCESO</th>
+                                                <th scope="col">OPCIONES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: .718rem;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav_activity" role="tabpanel" aria-labelledby="nav-activity-tab">
+                        <div class="row">
+                            <div class="col-md-4 mr-3">
+                                <div class="form-group">
+                                    <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+                                    <div class="input-group">
+                                        <input type="text" name="date_range_activity" class="form-control input-flat"
+                                            id="date_range_activity" style='height: 35px;' autocomplete="off">
+                                        <div class="input-group-append">
+                                            <div class="custom-dropdown" id="dropdown-content-act">
+                                                <button class="btn btn-primary input-flat dropdown-btn"
+                                                    id="dropdown-button-act" type="button">
+                                                    <i class="fas fa-sort-amount-down"></i>
+                                                    Filtrar
+                                                </button>
+                                                <ul class="dropdown__menu dropdown__right">
+                                                    <li class="dropdown__item">
+                                                        <a class="dropdown__name btnActSearch"> <i
+                                                                class="fas fa-calendar-check"></i> Por rangos de
+                                                            fechas</a>
+                                                    </li>
+                                                    <li class="dropdown__item">
+                                                        <a class="dropdown__name btnActSearchAll"><i
+                                                                class="fas fa-globe"></i> Ver todos los registros</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-4">
+                                <div class="form-group text-secondary">           
+                                    <div class="custom-dropdown" id="dropdown_content_hostorical">
+                                        <button class="dropdown-btn-2" id="dropdown_button_historical"  type="button">
+                                            <i class="fas fa-bolt dropdown__icon"></i>
+                                            Acciones Rapidas 
+                                            <div class="dropdown__icons">
+                                                <i class="fas fa-chevron-down dropdown__arrow"></i>
+                                                <i class="fas fa-times dropdown__close"></i>
+                                             </div>
+                                        </button>
+                                        <ul class="dropdown__menu dropdown__center">                                            
+                                            <li class="dropdown__item delete_historical">
+                                                <a class="dropdown__name"><i class="fas fa-trash dropdown__icon"></i> Eliminar</a>
+                                             </li>
+                                         </ul> 
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="scroll-h">
+                                    <table id="data_activity" class="table table-hover max-cont table-sm" width="100%">
+                                        <thead class="upper-text">
+                                            <tr>
+                                                <th scope="col"><label class="checkbox-container"><input type="checkbox"
+                                                            id="checkAllHistorical" name="checkAllHistotical"><span
+                                                            class="checkmark"></span></label></th>
+                                                <th>Nº</th>
+                                                <th>USUARIO</th>
+                                                <th>FECHA</th>
+                                                <th>ACCIÓN</th>
+                                                <th>MODULO</th>
+                                                <th>OBJETO_ID</th>
+                                                <th>OBJETO</th>
+                                                <!-- <th>DISPOSITIVO</th> -->
+                                                <th>OPCIONES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: .718rem;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include './detail.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/daterangepicker/daterangepicker.js' %}" type="text/javascript"></script>
+<script src="{% static 'access_users/js/list.js' %}"></script>
+<script src="{% static 'access_users/js/checkbox.js' %}"></script>
+<script src="{% static 'activity_users/js/list.js' %}"></script>
+<script src="{% static 'activity_users/js/checkbox.js' %}"></script>
+{% endblock %}

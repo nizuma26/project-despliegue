@@ -1,0 +1,26 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 10%;">Nro</th>
+        <th scope="col" style="width: 65%;">Nombre</th>
+        <th scope="col" style="width: 15%;">Estado</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+        
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'codbienes/modal_addcodbienes.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'codbienes/js/list.js' %}"></script>
+{% endblock %}

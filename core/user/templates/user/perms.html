@@ -1,0 +1,36 @@
+<div class="modal fade" id="permissionsModal" tabindex="-1" role="dialog" aria-labelledby="permissionsModalTitle"
+   aria-hidden="true">
+   <div class="modal-dialog modal-lg cascading-modal mt-5" role="document">
+      <div class="modal-content">
+         <div class="modal-c-header">      
+            <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                <h6 class="modal-title md-h title-custom text-white" id="permissionsModalTitle">
+                    <b><i class="fas fa-search"></i> <span>  Búsqueda de Permiso</span></b>
+                </h6>
+            </ul> 
+        </div>
+         <div class="modal-body">
+            <div class="scroll-v">
+               <table id="permsTable" class="table table-hover max-cont border-top">
+                  <thead>
+                     <tr>
+                        <th scope="col" style="width: 10%;"><label class="checkbox-container"><input type="checkbox"
+                                 id="checkAll" name="checkAll"><span class="checkmark"></th>
+                        <th scope="col" style="width: 90%;">PERMISOS <span class="badge badge-primary badge-pill f-11 ml-1" id="numPerms"></span></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <!--PERMISOS-->
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+            <button type="button" class="btn btn-primary btn-bord btn-sm" id="assignPerms"><i class="fas fa-save"></i> Asignar
+               permisos</button>
+            <button type="button" class="btn btn-out btn-sm btnClose" data-dismiss="modal"><i
+                  class="fas fa-sign-out-alt"></i> Cerrar</button>            
+        </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,26 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 10%;">Nro</th>
+        <th scope="col" style="width: 75%;">Nombre</th>
+        <th scope="col" style="width: 15%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'marca/modal_addmarca.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'marca/js/list.js' %}"></script>
+{% block javascript_list_form %}
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reporte Inventario x Desincorporación en Almacén</title>
+        <style>
+            @page {
+                size: A4 landscape;
+                /*sup derecho  inferior  izquierdo */
+                margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+                ;
+            }
+
+            body {
+                font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+                padding: 0;
+                margin: 0;
+                color: black;
+            }
+
+            .name-company {
+                font-size: 14px;
+                padding: 0;
+                margin: 0;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-align: center;
+            }
+            .name-footer {
+                font-size: 16px;
+                padding: 0;
+                margin: 0;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-align: center;
+        }
+            .tblguiapdf {
+                             
+                padding: 1px;
+                             
+            }
+            .tblguiapdf thead tr {
+                vertical-align: middle !important;
+                border: 1px solid #030303 !important;
+                padding: 3px;
+            /*  border-bottom: 0px;*/
+               
+                /*  border-color: black; */
+            }
+
+            .tblguiapdf tbody tr td {
+                vertical-align: middle !important;
+                border: 1px solid #030303;
+                padding: 3px;
+
+                /*border-color: #141414;
+
+
+                /* border-left: 0px;
+                border-right: 0px; */
+
+            }
+            .tblguiapdf tfoot tr td {
+                border: 1px solid #030303;
+                padding: 3px;
+
+                /*border-color: #141414;
+
+
+                /* border-left: 0px;
+                border-right: 0px; */
+
+            }
+
+            .img-logo {
+                margin-top: 10px;
+                width: 700px;
+                height: 50px;
+                margin-bottom: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- rounded-pill -->
+        <!-- 'comp': {'name': 'Dirección Regional de Salud Portuguesa', 'rif': 'G-20008795-1', 'tlf': '(0257) - 2531550 - 2512246 - 2534014',
+        'redsocial': 'http://saludportuguesa.gob.ve; twitter: @saludportuguesa', 'address': 'Carrera 3 con calle 09 Antiguo Hospital, Sector Curazao Guanare Portuguesa Venezuela'}, -->
+        <div class="container-fluid border border-dark pl-0 pr-0" style="height: 750px; width: 1070px; border-radius:10px;">
+            <img src="{% static 'img/newlogompps.png' %}" class="img-fluid d-block mx-auto img-logo">
+            <h1 class="name-company mt-2">{{ comp.name }}</h1>
+            <p class="text-center" style="font-size: 14px;">
+                {{ comp.address }}<br>
+                RIF: {{ comp.rif }} ==> {{ comp.tlf }}<br>
+                Redes Sociales:  {{ comp.redsocial }}<br>
+            </p>
+
+            <br>
+            <div class="row p-0 mb-0">
+                <div class="col-3 p-0 float-right ml-3">
+                    <div class="form-group clearfix">
+                        <div class="d-inline">
+                            <span style="font-weight: bold; margin-left: 10px;">CODIGO: </span>  <span class="rounded-pill" style="background-color: #eeeeee; font-size: 14px; color: red; text-align: center; padding: 6px;"> {{ encab_desincorp.cod_desinc }} </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mb-0" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+                <div class="col-12 p-0">
+                <div class="form-group clearfix">
+                    <div class="d-inline">
+                        <span style="font-weight: bold;">Fecha: </span> {{ encab_desincorp.fecha_desinc }}
+                    </div>
+                    <div class="d-inline" style="margin-left: 30px;">
+                        <span style="font-weight: bold;">Tipo Desincorporación: </span> {{ encab_desincorp.tipo_desinc }}
+                    </div>
+                    <div class="d-inline" style="margin-left: 30px;">
+                        <span style="font-weight: bold;">Usuario: </span> {{ encab_desincorp.usuario }}
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+                <div class="col-12 p-0">
+                    <div class="form-group clearfix">
+                    <div class="d-inline">
+                        <span style="font-weight: bold;">Almacén: </span> {{ encab_desincorp.almacen.nombre }}
+                    </div>
+                    <div class="d-inline" style="margin-left: 30px;">
+                        <span style="font-weight: bold;">Jefe de Deposito: </span> {{ encab_desincorp.almacen.responsable }}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 11px; margin-left: -6px; margin-top: -12px; margin-bottom: 10px;">
+                <div class="col-sm-8">
+                    <div class="input-group input-group-sm">
+                        <span style="font-weight: bold;">Observación: </span>
+                        <div class="input-group">
+                            {{ encab_desincorp.observ }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <table class="tblguiapdf table" cellpadding="0" cellspacing="0" style="font-size: 11px;">
+                <thead>
+                    <tr style="text-align: center; border: #030303">
+                        <td style="width: 300px;">PRODUCTO</td>
+                        <td style="width: 320px;">DESCRIPCION</td>
+                        <td style="width: 70px;">PRECIO</td>
+                        <td style="width: 70px;">CANT</td>
+                        <td style="width: 80px;">SUB-TOTAL</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for det in detalle_desincorp %}
+                    <tr>
+                        <td>{{ det.prod.codigo }} - {{ det.prod.nombre }}</td>
+                        <td>{{ det.prod.descripcion }} - {{ det.prod.marca }}</td>
+                        <td class="text-right">{{ det.precio|floatformat:2 }}</td>
+                        <td class="text-center">{{ det.cant }}</td>
+                        <td class="text-right">{{ det.subtotal|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right" style="border-bottom: 0px;"><b>Subtotal</b></td>
+                        <td class="text-right">{{ encab_desincorp.subtotal|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="border-top: 0px; border-bottom: 0px;"><b>Iva %</b></td>
+                        <td class="text-right">{{ encab_desincorp.iva|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="border-top: 0px;"><b>Total</b></td>
+                        <td class="text-right">{{ encab_desincorp.total|floatformat:2 }}</td>
+                    </tr>
+                    <td colspan="5">
+
+                        <h1 class="name-footer">
+                            Reporte Inventario x Desincorporación en Almacén <br>                        
+                            Total de productos: {{ encab_desincorp.detdesinc_almacen_set.all.count }}
+                        </h1>
+                        
+                    </td>
+                </tfoot>
+
+
+            </table>
+        </div>
+    </body>
+    </html>

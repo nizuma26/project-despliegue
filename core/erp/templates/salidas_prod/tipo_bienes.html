@@ -1,0 +1,37 @@
+{% load static %}
+<div class="modal fade" id="myModalBienes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog cascading-modal mt-5" role="document">
+        <form id="frmBienes" action="." method="post">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul
+                        class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="title_bienes">
+                            <b><i class="fas fa-plus"></i> <span> Bienes a Distribuir </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Tipo de Unidad</label>
+                                    <select class="effect-2 form-control custom-select-sm f-12" name="bienes"
+                                        id="bienes">
+                                        <option value="BM">Bienes Muebles</option>
+                                        <option value="MC">Materiales de Consumo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-primary btn-bord accept"><i class="fas fa-check-circle"></i>
+                        Aceptar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

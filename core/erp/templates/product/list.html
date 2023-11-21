@@ -1,0 +1,66 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+
+{{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col" style="width: 3%;"><label class="checkbox-container"><input type="checkbox" id="checkAll" name="checkAll"><span class="checkmark"></span></label></th>
+        <th scope="col" style="width: 5%;">IMG</th> 
+        <th scope="col" style="width: 9%;">CODIGO</th>
+        <th scope="col" style="width: 19%;">NOMBRE</th>
+        <th scope="col" style="width: 19%;">CATEGORIA</th>
+        <th scope="col" style="width: 12%;">MARCA</th>
+        <th scope="col" style="width: 14%;">MODELO</th>
+        <th scope="col" style="width: 5%;">ESTADO</th>
+        <th scope="col" style="width: 14%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block add_modales %}
+
+    {% include './historical.html' %}
+
+    {% include './detail.html' %}
+
+{% endblock %}
+
+{% block content_list_before %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group text-secondary">           
+            <div class="custom-dropdown" id="dropdown-content">
+                <button class="dropdown-btn-2" id="dropdown-button"  type="button">
+                    <i class="fas fa-bolt dropdown__icon"></i>
+                    Acciones Rapidas 
+                    <div class="dropdown__icons">
+                        <i class="fas fa-chevron-down dropdown__arrow"></i>
+                        <i class="fas fa-times dropdown__close"></i>
+                     </div>
+                </button>
+                <ul class="dropdown__menu dropdown__center">
+                    <li class="dropdown__item disabled">                       
+                       <a class="dropdown__name">  <i class="fas fa-unlink dropdown__icon"></i> Inactivar</a>
+                    </li>
+                    <li class="dropdown__item is_active">
+                       <a class="dropdown__name"><i class="fas fa-check-circle dropdown__icon"></i> Activar</a>
+                    </li>
+                    <li class="dropdown__item delete">
+                        <a class="dropdown__name"><i class="fas fa-trash dropdown__icon"></i> Eliminar</a>
+                     </li>
+                 </ul> 
+            </div>   
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block javascript_list %} 
+<script src="{% static 'product/js/list.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/checkbox.js' %}" type="text/javascript"></script>
+{% endblock %}
+

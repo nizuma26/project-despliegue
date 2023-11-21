@@ -1,0 +1,55 @@
+{% extends 'report.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-lg-6">
+
+</div>
+{% endblock %}
+
+{% block report_content %}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label>Almacén:</label>
+            <div class="input-group">
+                {{ form.almacen }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label>Categoria:</label>
+            <div class="input-group">
+                {{ form.categoria }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 my-auto pt-3 pl-2">
+        <button type="button" class="btn btn-sm btn-primary input-flat btnReport" style="width: 50%; height: 35px;"><i
+                class="fas fa-search"></i> FILTRAR</button>
+    </div>
+</div>
+<hr>
+<div class="table-wrapper">
+    <table class="table table-bordered max-cont table-hover table-sm" width="100%" style="font-size: 11px;"
+        id="dtt_Report_Almacen">
+        <thead>
+            <tr style="font-size: 12;">
+                <th scope="col" style="width: 20%;">PRODUCTOS</th>
+                <th scope="col" style="width: 26%;">DESCRIPCIÓN</th>
+                <th scope="col" style="width: 20%;">CATEGORIA</th>
+                <th scope="col" style="width: 12%;">MARCA</th>
+                <th scope="col" style="width: 12%;">MODELO</th>
+                <th scope="col" style="width: 10%;">STOCK</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block javascript_report %}
+    <script src="{% static 'inventario/almacen_prod/reportalmacen.js' %}"></script>
+{% endblock %}

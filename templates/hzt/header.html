@@ -1,0 +1,219 @@
+<nav class="main-header navbar navbar-expand shadow-sm border-0" id="navbar_control" navbar-theme="{{customize.navbar_theme}}">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <h5 class="mt-1">
+              <a href="{% url 'index_app:Index' %}">
+                <span class="brand-text font-weight-light font-weight-normal">
+                    <i class="fab fa-magento ml-3 mr-1"></i> StockManager
+                </span>
+              </a>
+            </h5>            
+        </li>
+      </ul>
+    <ul class="navbar-nav ml-auto">      
+      <li class="nav-item">
+        <div class="dropdown">
+          <a class="nav-link notify_unread btnNot" id="btnNot" type="button">
+            <i class="far fa-bell"></i>          
+            <span class="badge badge-secondary badge-pill navbar-badge number_ntf"></span>
+          </a>       
+          {% include 'notifications.html' %}
+        </div>
+  
+      </li>
+      <li class="nav-item dropdown">
+  
+        <!-- cerrar sesion Dropdown Menu -->
+      <li class="nav-item dropdown">
+      <li class="dropdown user user-menu">
+        <a href="#" class="nav-link btnPanel  dropdown-toggle" data-toggle="dropdown">
+          <img src="{{request.user.get_image}}" class="user-image" style="width: 27px; height: 27px;" alt="User Image">
+          <span class="hidden-xs">{{request.user.get_full_name}}</span>
+        </a>
+        <ul class="dropdown-menu shadow border-0 dropdown-animation h-blue" style="margin-top: 9px;">
+          <!-- User image -->
+          <li class="user-header">
+            <img src="{{request.user.get_image}}" class="img-circle" alt="User Image">
+            <p>
+              {{request.user.get_full_name}}
+              <small>{{request.user.last_login}}</small>
+            </p>
+          </li>
+          <!-- Menu Body -->
+          <li class="user-body text-sm">
+            <div class="row">
+              <div class="col-sm-4 text-center">
+                <a href="{% url 'user:user_profile' %}">Editar Perfil</a>
+              </div>
+              <div class="col-sm-4 text-center">
+                <a href="{% url 'user:user_change_password' %}">Cambiar Contraseña</a>
+              </div>
+              <div class="col-sm-4 text-center">
+                <a>Bandeja de Entrada</a>
+              </div>
+            </div>
+            <!-- /.row -->
+          </li>
+          <!-- Menu Footer-->
+          <li class="user-footer text-sm">
+            <div class="float-sm-left">
+              <a class="btn btn-default btn-flat text-secondary" onclick="abrir_modal_usuario()">Ver Perfil</a>
+            </div>
+            <div class="float-sm-right">
+              <a href="{% url 'usuarios_app:logout' %}" class="btn btn-default btn-flat text-secondary">Salir</a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      </li>
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-xl text-sm navbar_sidebar shadow-sm" id="nav_sidebar_control" nav-sidebar-theme="{{customize.sidebar_theme}}" nav-link-theme="{{customize.nav_link_theme}}">
+    <div>
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>  
+      <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav navbar_sidebar_top">          
+          <li class="nav-item">
+            <a href="{% url 'index_app:Index' %}" class="nav-link"><i class="fas fa-house-user"></i> Inicio</a>
+          </li>          
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Inventario</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 dropdown-animation shadow nav_dropdown">
+              <li><a href="{% url 'erp:product_list' %}" class="dropdown-item">Catálogo </a></li>
+              <li><a href="{% url 'erp:almacen_list' %}" class="dropdown-item mt-1">Almacén</a></li>
+              <li><a href="{% url 'erp:stock_list' %}" class="dropdown-item mt-1">Control de Stock</a></li>
+              <li><a href="{% url 'erp:category_list' %}" class="dropdown-item mt-1">Categorias</a></li>
+              <li><a href="{% url 'erp:marca_list' %}" class="dropdown-item mt-1">Marca</a></li>
+              <li><a href="{% url 'erp:modelo_list' %}" class="dropdown-item mt-1">Modelo</a></li>
+              <li><a href="{% url 'erp:grupo_list' %}" class="dropdown-item mt-1">Grupos</a></li>
+              <li><a href="{% url 'erp:subgrupo_list' %}" class="dropdown-item mt-1">Subgrupos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="movements" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Movimientos</a>
+            <ul aria-labelledby="movements" class="dropdown-menu border-0 shadow dropdown-animation nav_dropdown">
+              <li><a href="{% url 'erp:concepto_list' %}" class="dropdown-item">Conceptos de Movimiento</a></li>  
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover mt-2">
+                <a id="movements_almacen" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">En Almacén</a>
+                <ul aria-labelledby="movements_almacen" class="dropdown-menu border-0 shadow dropdown-animation">
+                  <li><a tabindex="-1" href="{% url 'erp:ingreso_list' %}" class="dropdown-item">Incorporaciones</a></li>
+                  <li><a href="{% url 'erp:salida_list' %}" class="dropdown-item mt-1">Distribuciones</a></li>
+                  <li><a href="{% url 'erp:desincorp_list' %}" class="dropdown-item mt-1">Desincorporaciones</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu dropdown-hover mt-2">
+                <a id="movements_unidad" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">En Unidad</a>
+                <ul aria-labelledby="movements_unidad" class="dropdown-menu border-0 shadow dropdown-animation">
+                  <li><a tabindex="-1" href="{% url 'erp:traslado_list' %}" class="dropdown-item">Traslados</a></li>
+                  <li><a href="{% url 'erp:desinc_list' %}" class="dropdown-item mt-1">Desincorporaciones</a></li>
+                </ul>
+              </li>
+              <!-- End Level two -->
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Código de Bienes</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'erp:codbien_list' %}" class="dropdown-item">Código de Bienes</a></li>
+              <!-- End Level two -->
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Contactos</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'erp:unidad_list' %}" class="dropdown-item">Unidades</a></li>
+              <li><a href="{% url 'erp:depart_list' %}" class="dropdown-item">Departamentos</a></li>
+              <li><a href="{% url 'erp:proveedor_list' %}" class="dropdown-item">Proveedores</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Servicio Técnico</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'erp:soporte_list' %}" class="dropdown-item">Recepción de Soporte</a></li>
+              <li><a href="#" class="dropdown-item">Historial de Reparaciones</a></li>
+              <li><a href="#" class="dropdown-item">Técnicos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Solicitudes</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'solicitudes:soporte_list' %}" class="dropdown-item">Servicio Técnico</a></li>
+              <li><a href="{% url 'solicitudes:solicitud_list' %}" class="dropdown-item">Solicitud de Movimientos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Gestion de Aprobaciones</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+                <li class="dropdown-submenu dropdown-hover">
+                    <a id="movements_almacen" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Movimientos</a>
+                    <ul aria-labelledby="movements_almacen" class="dropdown-menu border-0 shadow">
+                      <li><a tabindex="-1" href="{% url 'aprobaciones:aprob_incorporacion_list' %}" class="dropdown-item ">Incorporaciones</a></li>
+                      <li><a href="{% url 'aprobaciones:aprob_distribucion_list' %}" class="dropdown-item mt-1">Distribuciones</a></li>
+                      <li><a href="{% url 'aprobaciones:aprob_desincorp_almacen_list' %}" class="dropdown-item mt-1">Desincorporaciones en Almacén</a></li>
+                      <li><a href="{% url 'aprobaciones:aprob_traslado_list' %}" class="dropdown-item mt-1">Traslados</a></li>
+                      <li><a href="{% url 'aprobaciones:aprob_desincorp_list' %}" class="dropdown-item mt-1">Desincorporaciones en Unidad</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu dropdown-hover mt-2">
+                    <a id="movements_unidad" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Solicitudes</a>
+                    <ul aria-labelledby="movements_unidad" class="dropdown-menu border-0 shadow">
+                      <li><a tabindex="-1" href="{% url 'aprobaciones:aprob_distribucion_list' %}" class="dropdown-item">Solicitud de Movimientos</a></li>
+                      <li><a href="{% url 'aprobaciones:aprob_desincorp_almacen_list' %}" class="dropdown-item mt-1">Solicitud de Servicio Técnico</a></li>
+                    </ul>
+                  </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"> Reportes</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+                <li class="dropdown-submenu dropdown-hover">
+                    <a id="movements_almacen" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Movimientos</a>
+                    <ul aria-labelledby="movements_almacen" class="dropdown-menu border-0 shadow">
+                      <li><a tabindex="-1" href="{% url 'report:ingreso_report' %}" class="dropdown-item ">Incorporaciones</a></li>
+                      <li><a href="{% url 'report:salida_report' %}" class="dropdown-item mt-1">Distribuciones</a></li>
+                      <li><a href="{% url 'report:desinc_almacen_report' %}" class="dropdown-item mt-1">Desincorporaciones en Almacén</a></li>
+                      <li><a href="{% url 'report:traslado_report' %}" class="dropdown-item mt-1">Traslados</a></li>
+                      <li><a href="{% url 'report:desinc_unidad_report' %}" class="dropdown-item mt-1">Desincorporaciones en Unidad</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu dropdown-hover mt-2">
+                    <a id="movements_unidad" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Inventario</a>
+                    <ul aria-labelledby="movements_unidad" class="dropdown-menu border-0 shadow">
+                      <li><a tabindex="-1" href="{% url 'report:unidad_report' %}" class="dropdown-item">Inventario en Unidad</a></li>
+                      <li><a href="{% url 'report:almacen_report' %}" class="dropdown-item mt-1">Inventario en Almacén</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu dropdown-hover mt-2">
+                    <a id="movements_unidad" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Solicitudes</a>
+                    <ul aria-labelledby="movements_unidad" class="dropdown-menu border-0 shadow">
+                      <li><a tabindex="-1" href="{% url 'solicitudes:solicitud_list' %}" class="dropdown-item">Solicitud de Movimientos</a></li>
+                      <li><a href="{% url 'solicitudes:soporte_list' %}" class="dropdown-item mt-1">Solicitud de Servicio Técnico</a></li>
+                    </ul>
+                  </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Seguridad</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'user:user_list' %}" class="dropdown-item">Usuarios </a></li>
+              <li><a href="{% url 'group:group_list' %}" class="dropdown-item mt-1">Roles & Permisos</a></li>
+              <li><a href="{% url 'security:access_users_list' %}" class="dropdown-item mt-1">Bitácora de Usuarios</a></li>
+              <li><a href="{% url 'erp:respaldo_db' %}" class="dropdown-item mt-1">Respaldos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Configuración</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow nav_dropdown">
+              <li><a href="{% url 'erp:empresa_list' %}" class="dropdown-item">Institución - Empresa</a></li>
+              <li><a href="/" class="dropdown-item mt-1">Aplicación</a></li>
+              <li><a href="{% url 'erp:monedas_list' %}" class="dropdown-item mt-1">Monedas</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>      
+    </div>
+</nav>

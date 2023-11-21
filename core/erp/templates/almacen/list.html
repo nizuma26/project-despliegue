@@ -1,0 +1,43 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<style>
+    ul.select2-results__options li {
+        font-size: 13px;
+        line-height: 12px;
+    }    
+</style>
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 10%;">CÓDIGO</th>
+        <th scope="col" style="width: 35%;">NOMBRE</th>
+        <th scope="col" style="width: 25%;">RESPONSABLE</th>
+        <th scope="col" style="width: 15%;">CÉDULA</th>
+        <th scope="col" style="width: 15%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'almacen/modal_addalmacen.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'lib/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/select2/js/i18n/es.js' %}" type="text/javascript"></script>
+<script src="{% static 'almacen/js/list.js' %}"></script>
+<script>
+    $('.select2').select2({
+        theme: "bootstrap4",
+        language: 'es',
+        dropdownParent: $('#myModalAlmacen .modal-body')
+    });
+</script>
+{% endblock %}

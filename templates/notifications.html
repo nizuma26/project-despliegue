@@ -1,0 +1,40 @@
+<div class="Menu_NOtification_Wrap" id="containerNot">
+    <div class="notification_Header">
+      <ul class="content_choices_header">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <li class="nav-item options title_header">
+              <h4 class="title_theme">Notificaciones <button class="btn btn-sm choices_all text-white float-right"><i class="fas fa-ellipsis-v choices_notification"></i></button></h4>
+                 
+            </li>
+          </div>          
+        </div>
+        <div class="row">          
+          <div class="col-sm-5">
+            <li class="nav-item options">
+              <button class="btn btn-sm header_btn btn_all tab_active" type="button">Todas</button>
+            </li>
+          </div>
+          <div class="col-sm-5">
+            <li class="nav-item options">
+              <button class="btn btn-sm header_btn btn_unread" type="button">No leidas</button>
+            </li>
+          </div>
+          <div class="col-sm-2">
+            <li class="nav-item options">
+              <button class="btn btn-sm header_btn btn_read" type="button">Leidas</button>
+            </li>
+          </div>          
+        </div>        
+      </ul>
+    </div>
+    <input name="user_id" id="user_id" type="hidden" value="{{request.user.id}}">
+    <div class="Notification_body">
+      
+    </div>
+    <div class="nofity_footer">
+      <div class="submit_button text-center">
+        <a class="btn_notify f-13 text-secondary">Ver más...</a>
+      </div>
+    </div>
+  </div>

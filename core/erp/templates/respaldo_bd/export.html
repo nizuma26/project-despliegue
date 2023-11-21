@@ -1,0 +1,48 @@
+<div class="modal fade" id="ModalConfirmacion" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog cascading-modal mt-5">
+        <form class="modal-content" method="post" id="form_verificacion">{% csrf_token %}
+            <div class="modal-c-header">
+                <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                    <h6 class="modal-title md-h title-custom text-white" id="modaltitle3">
+                        <b><i class="fas fa-lock"></i> <span> Verificación de Seguridad </span></b>
+                    </h6>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col mb-3">
+                        <div class="form-group">
+                            <label for="username">Usuario</label>
+                            <input type="text" id="username" name="username" class="form-control rounded-pill text-sm"
+                                placeholder="Usuario" value="{{request.user.username}}" style="height: 30px;" readonly>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password1">Contraseña</label>
+                            <input type="password" id="password1" name="password1" placeholder="Ingrese su contraseña"
+                                class="effect-2 form-control" minlength="6" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password2">Confirme la Contraseña</label>
+                            <input type="password" id="password2" name="password2" placeholder="Repita su contraseña"
+                                class="effect-2 form-control" minlength="6" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center" id="spinner_download_bd">
+            </div>
+            <div class="modal-footer text-center justify-content-center border-0">
+                <button type="submit" class="btn btn-primary btn-bord"><i class="fas fa-download"></i> Exportar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i>
+                    Salir</button>
+            </div>
+    </div>
+    </form>
+</div>
+</div>

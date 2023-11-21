@@ -1,0 +1,27 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 6%;">Nro</th>
+        <th scope="col" style="width: 11%;">CÓDIGO</th>
+        <th scope="col" style="width: 12%;">SÍMBOLO</th>
+        <th scope="col" style="width: 16%;">NOMBRE</th>
+        <th scope="col" style="width: 20%;">PAÍS</th>
+        <th scope="col" style="width: 14%;">TASA DE CAMBIO</th>
+        <th scope="col" style="width: 8%;">STATUS</th>
+        <th scope="col" style="width: 13%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include './create.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'monedas/js/list.js' %}"></script>
+{% endblock %}

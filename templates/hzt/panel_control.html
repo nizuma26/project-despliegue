@@ -1,0 +1,76 @@
+<aside class="control-sidebar custom-control-sidebar control-sidebar-light" style="display: block;">
+    <div class="p-3 control-sidebar-content os-theme-dark" id="control-sidebar-content">
+        <h6>Perzonalizar Interfaz <span class="close_panel_control float-right f-15" data-widget="control-sidebar" data-controlsidebar-slide="true" role="button"><i class="fas fa-times"></i></span></h6>
+        <hr class="mb-2">
+        <div class="mb-4">
+            <button class="btn btn-sm btn_custom_interface f-13"> Predeterminado</button>             
+            <button class="btn btn-sm btn_custom_interface float-right f-13 save_settings">Guardar</button>
+        </div>
+        <h6>Color principal en el body</h6>
+        <div class="btn-group mb-4" style="width: 100%;">
+            <ul class="fc-color-picker btn_color_interface" id="color-chooser">
+                <li><span class="c-blue main_color" data-theme="theme_blue" id="main_blue"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-orange main_color" data-theme="theme_orange" id="main_orange"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-green main_color" data-theme="theme_green" id="main_green"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-red main_color" data-theme="theme_red" id="main_red"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-purple main_color" data-theme="theme_purple" id="main_purple"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-pink main_color" data-theme="theme_pink" id="main_pink"><i class="fas fa-square"></i></span></li>
+            </ul>
+        </div>
+        <h6>Enlaces activos</h6>
+        <div class="btn-group mb-4" style="width: 100%;">
+            <ul class="fc-color-picker btn_color_interface" id="color-chooser">
+                <li><span class="c-blue nav_link_color" data-link="theme_blue" id="theme_blue"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-orange nav_link_color" data-link="theme_orange" id="theme_orange"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-green nav_link_color" data-link="theme_green" id="theme_green"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-red nav_link_color" data-link="theme_red" id="theme_red"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-purple nav_link_color" data-link="theme_purple" id="theme_purple"><i class="fas fa-square"></i></span></li>
+                <li><span class="c-pink nav_link_color" data-link="theme_pink" id="theme_pink"><i class="fas fa-square"></i></span></li>
+            </ul>
+        </div>
+        <h6>Color del menú</h6>
+        <ul class="list-unstyled clearfix">
+            <li><div class="theme-color"><a href="#" id="sidebar_light" class="navbar-theme" navbar-theme="themelight1" role="button"><span class="head"></span><span class="cont"></span></a><a href="#" id="sidebar_dark" class="navbar-theme" navbar-theme="theme1" role="button"><span class="head"></span><span class="cont"></span></a></div></li>
+        </ul>        
+        <h6>Color de la barra de navegación</h6>
+        <ul class="list-unstyled clearfix">
+            <li class="theme-option"><div class="theme-color"><a href="#" class="header-theme" header-theme="theme_white"><span class="head"></span><span class="cont"></span></a><a href="#" class="header-theme" header-theme="theme_pink"><span class="head"></span><span class="cont"></span></a><a href="#" class="header-theme" header-theme="theme_green"><span class="head"></span><span class="cont"></span></a><a href="#" class="header-theme" header-theme="theme_blue"><span class="head"></span><span class="cont"></span></a><a href="#" class="header-theme" header-theme="theme_orange"><span class="head"></span><span class="cont"></span></a><a href="#" class="header-theme" header-theme="theme_red"><span class="head"></span><span class="cont"></span></a></div></li>
+        </ul>
+        <h6>Estilos del menú de navegación</h6>
+        <div class="mb-4">           
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="sidebar_orientation">
+                <label for="sidebar_orientation" class="custom-control-label font-weight-normal">Orientación horizontal</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="sidebar_fixed">
+                <label for="sidebar_fixed" class="custom-control-label font-weight-normal">Fijo</label>
+            </div>            
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="sidebar_nav_legacy">
+                <label for="sidebar_nav_legacy" class="custom-control-label font-weight-normal">Estilo legacy</label>
+            </div>           
+        </div>
+        <h6>Disminuir tamaño del texto</h6>
+        <div class="mb-4">
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="small_body">
+                <label for="small_body" class="custom-control-label font-weight-normal">Body</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="small_navbar">
+                <label for="small_navbar" class="custom-control-label font-weight-normal">Barra de navegación</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-1">
+                <input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="small_footer">
+                <label for="small_footer" class="custom-control-label font-weight-normal">Pie de página</label>
+            </div>
+        </div>
+        <h6>Barra de navegación</h6>
+        <div class="custom-control custom-checkbox mb-1"><input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="navbar_fixed"><label for="navbar_fixed" class="custom-control-label font-weight-normal">Fijo</label></div>
+        <div class="py-3">
+            <h6>Pie de página</h6>
+            <div class="custom-control custom-checkbox"><input type="checkbox" value="1" class="mr-1 custom-control-input custom-control-input-primary custom-control-input-outline" id="footer_fixed"><label for="footer_fixed" class="custom-control-label font-weight-normal">Fijo</label></div>
+        </div>
+    </div>
+</aside>

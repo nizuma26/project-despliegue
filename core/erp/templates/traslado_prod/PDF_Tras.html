@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reporte Inventario x Traslado</title>
+        <style>
+            @page {
+                size: A4 landscape;
+                /*sup derecho  inferior  izquierdo */
+                margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+                ;
+            }
+
+            body {
+                font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+                padding: 0;
+                margin: 0;
+                color: black;
+            }
+
+            .name-company {
+                font-size: 14px;
+                padding: 0;
+                margin: 0;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-align: center;
+            }
+            .tblguiapdf {
+                             
+                padding: 1px;
+                             
+            }
+            .tblguiapdf thead tr {
+                vertical-align: middle !important;
+                border: 1px solid #030303 !important;
+                padding: 3px;
+ 
+            }
+
+            .tblguiapdf tbody tr td {
+                vertical-align: middle !important;
+                border: 1px solid #030303;
+                padding: 3px;
+
+                /*border-color: #141414;
+
+
+                /* border-left: 0px;
+                border-right: 0px; */
+
+            }
+            .tblguiapdf tfoot tr td {
+                border: 1px solid #030303;
+                padding: 3px;
+
+                /*border-color: #141414;
+
+
+                /* border-left: 0px;
+                border-right: 0px; */
+
+            }
+
+            .img-logo {
+                margin-top: 10px;
+                width: 700px;
+                height: 50px;
+                margin-bottom: 10px;
+            }
+
+        </style>
+    </head>
+<body>
+    <!-- rounded-pill -->
+    <!-- 'comp': {'name': 'Dirección Regional de Salud Portuguesa', 'rif': 'G-20008795-1', 'tlf': '(0257) - 2531550 - 2512246 - 2534014',
+    'redsocial': 'http://saludportuguesa.gob.ve; twitter: @saludportuguesa', 'address': 'Carrera 3 con calle 09 Antiguo Hospital, Sector Curazao Guanare Portuguesa Venezuela'}, -->
+    <div class="container-fluid border border-dark pl-0 pr-0" style="height: 750px; width: 1070px; border-radius:10px;">
+        <img src="{% static 'img/newlogompps.png' %}" class="img-fluid d-block mx-auto img-logo">
+        <h1 class="name-company">{{ comp.name }}</h1>
+        <p class="text-center" style="font-size: 14px;">
+            {{ comp.address }}<br>
+            RIF: {{ comp.rif }} ==> {{ comp.tlf }}<br>
+            Redes Sociales:  {{ comp.redsocial }}<br>
+        </p>
+
+        <p class="text-center" style="font-size: 14px;">
+                Guia de Traslado : <span style="font-weight: bold;">{{ encab_tras.destino.nombre }}</span>
+        </p>
+        <div class="row p-0 mb-0">
+            <div class="col-3 p-0 float-right ml-3">
+                <div class="form-group clearfix">
+                    <div class="d-inline">
+                        <span style="font-weight: bold; margin-left: 10px;">CODIGO: </span>  <span class="rounded-pill" style="background-color: #eeeeee; font-size: 14px; color: red; text-align: center; padding: 6px;"> {{ encab_tras.cod_traslado }} </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-0" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+              <div class="form-group clearfix">
+                <div class="d-inline">
+                    <span style="font-weight: bold;">Fecha: </span> {{ encab_tras.fecha_traslado }}
+                </div>
+                <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Tipo Traslado: </span> {{ encab_tras.tipo_traslado }}
+                 </div>
+                 <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Usuario: </span> {{ encab_tras.usuario }}
+                </div>
+                 
+                 <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Nº Items: </span>  {{ detalle_tras.count }}
+                 </div>
+
+              </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+                <div class="form-group clearfix">
+                  <div class="d-inline">
+                      <span style="font-weight: bold;">Origen: </span> {{ encab_tras.origen.nombre }}
+                  </div>
+                  <div class="d-inline" style="margin-left: 20px;">
+                     <span style="font-weight: bold;">Destino: </span> {{ encab_tras.destino.nombre }}
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 11px; margin-left: -6px; margin-top: -12px; margin-bottom: 10px;">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm">
+                    <span style="font-weight: bold;">Observación: </span>
+                    <div class="input-group">
+                        {{ encab_tras.observ }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <table class="tblguiapdf table" cellpadding="0" cellspacing="0" style="font-size: 9px;">
+            <thead>
+                <tr style="text-align: center;  border: #030303">
+                    <th style="width: 135px;">DESDE</th>
+                    <th style="width: 135px;">PARA</th>                    
+                    <th style="width: 60px;">COD. BIEN</th>
+                    <th style="width: 208px;">PRODUCTO</th>
+                    <th style="width: 240px;">DESCRIPCION</th>
+                    <th style="width: 60px;">PRECIO</th>
+                    <th style="width: 60px;">SUB-TOTAL</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for det in detalle_tras %}
+                <tr>
+                    <td>{{ det.codubica.nombre }}</td>
+                    <td>{{ det.ubica_destino.nombre }}</td>                    
+                    <td class="text-center">{{ det.codbien.codbien }}</td>
+                    <td>{{ det.prod.codigo }} - {{ det.prod.nombre }}</td>
+                    <td>{{ det.prod.descripcion }} - {{ det.prod.marca }}</td>
+                    <td class="text-right">{{ det.precio|floatformat:2 }}</td>
+                    <td class="text-right">{{ det.subtotal|floatformat:2 }}</td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="text-right" style="border-bottom: 0px;"><b>Subtotal</b></td>
+                    <td class="text-right">{{ encab_tras.subtotal|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right" style="border-top: 0px; border-bottom: 0px;"><b>Iva %</b></td>
+                    <td class="text-right">{{ encab_tras.iva|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right" style="border-top: 0px;"><b>Total</b></td>
+                    <td class="text-right">{{ encab_tras.total|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <br>
+                        <span style="font-weight: bold; margin-left: 150px;">Firmas conforme; </span><br>
+                        <div class="row ml-3 pt-4" style="padding-bottom: 12px;">
+                            <div class="col-4 pt-2" style="margin-left: 80px;">
+                                <div class="input-group input-group-sm">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Unidad Solicitante </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-4 pt-2" style="margin-left: 80px;">
+                                <div class="input-group input-group-sm ml-4">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Direcc. Adm. y Serv. </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-4 pt-2" style="margin-left: 80px;">
+                                <div class="input-group input-group-sm ml-4">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Coord. Bienes Nacionales </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <br>
+                        <!-- <p class="text-uppercase font-weight-bold text-center" style="font-size: 8px;">
+                            Total de productos {{ detalle_distrib.count }}<br>
+
+                        </p> -->
+                    </td>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    </div>
+    </body>
+    </html>

@@ -1,0 +1,65 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<div class="col-lg-6">
+  <h3 class="card-title">                    					
+    <i class="fas fa-clock"></i>                   
+    <b>Programar respaldo automático</b>
+</h3>
+</div>
+{% endblock %}
+
+{% block content %}
+<h1></h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="container">
+              <div class="row mb-5">
+                <div class="col-lg-5">
+                  <div class="bootstrap-timepicker">
+                    <div class="form-group">
+                      <div class="input-group input-group-sm">  
+                        <label for="hora">Programar Respaldo </label>
+                        <div class="input-group mb-3" id="timepicker" data-target-input="nearest">            
+                          {{ form.backup_time }}                          
+                          <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                            <div class="input-group-text "><i class="far fa-clock"></i></div>
+                          </div>              
+                        </div>
+                      </div>            
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form group -->
+                  </div>
+                </div>
+                
+              </div> 
+            <button type="submit" class="btn btn-primary">Programar respaldo</button>
+
+            </div>
+
+          </div>
+        </div>
+        </div>        
+        
+      </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block javascript_form %}
+   <!-- Añadir JS para inicializar el timepicker -->
+   <script>
+    $(function() {
+      $('#timepicker').datetimepicker({
+        format: 'LT',        
+    })
+    });
+  </script>
+{% endblock %}

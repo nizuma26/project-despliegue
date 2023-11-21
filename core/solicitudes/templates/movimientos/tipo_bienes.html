@@ -1,0 +1,35 @@
+{% load static %}
+<div class="modal fade" id="tipoBienes" role="dialog" data-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal mt-5" role="document">
+        <form id="frmBienes" action="."  method="post">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="title_bienes">
+                            <b><span> Notificación </span> <i class="fas fa-question-circle fade_down_animation_2"></i> </b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid d-flex align-items-center justify-content-center">
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <p class="text-secondary">
+                                    ¿Los bienes incluyen código de bien nacional?
+                                </p>                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-primary btn-bord accept"><i class="fas fa-check-circle"></i>
+                        Si
+                    </button>
+                    <button type="button" class="btn bg-simple-c-purple btn-bord text-white decline"><i class="fas fa-times-circle"></i>
+                        No
+                    </button>
+                </div>              
+            </div>
+        </form>
+    </div>
+</div>

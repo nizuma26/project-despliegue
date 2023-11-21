@@ -1,0 +1,91 @@
+{% extends 'login/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="login-box">
+    <div class="row">
+        <div class="col-12">
+            <div class="card cascading-card shadow fade_down_animation">
+                <div class="card-c-header mb-2 py-1">
+                    <ul class="md-header light-blue text-white darken-3 d-flex align-items-center justify-content-center ">
+                        <h4 class="mb-5 mt-2">
+                            <i class="fab fa-magento"></i>
+                        </h4>
+                        <h5 class="position-absolute" style="margin-bottom: -25px;">
+                            Bienvenido
+                        </h5>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-center text-secondary" style="font-size: 1.125rem"><strong> Inicie Sesión</strong>
+                    </h6>
+                    <p class="login-box-msg">
+                        Ingrese su usuario y contraseña para acceder al sistema.</p>
+                    <div class="box">
+                        <form action="." method="post">
+                            <input type="hidden" name="next" value="{{ next }}">
+                            {% csrf_token %}
+                            <div class="inputBox">
+                                {{ form.username|add_class:'form-control'|attr:'autocomplete:off' }}
+                                <label>Nombre de usuario</label>
+                            </div>
+                            <div class="inputBox">
+                                {{ form.password|add_class:'form-control'|attr:'autocomplete:off' }}
+                                <label>Contraseña</label>
+                                <div class="fas fa-eye-slash view"></div>
+                            </div>
+                            <p class="mt-3 text-center">
+                                <a href="{% url 'usuarios_app:reset_password' %}">Olvidaste tu contraseña <i
+                                        class="fas fa-key"></i>?</a>
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-send btn-block">
+                                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="application/javascript">
+        {% if form.errors %}
+            let errors = '';
+            {#                {% for field in form %}#}
+            {#                    {% for error in field.errors %}#}
+            {#                        errors += '{{ error }}\n';#}
+            {#                    {% endfor %}#}
+            {#                {% endfor %}#}
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n';
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: 'error'
+            });
+        {% endif %}
+    </script>
+    <script>
+        const passwordField = document.getElementById("password");
+        const toggleButton = document.getElementsByClassName("view")[0];
+
+        toggleButton.addEventListener("click", () => {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.classList.remove("fa-eye-slash");
+                toggleButton.classList.add("fa-eye");
+            } else {
+                passwordField.type = "password";
+                toggleButton.classList.remove("fa-eye");
+                toggleButton.classList.add("fa-eye-slash");
+            }
+        })
+    </script>
+</div>
+{% endblock %}

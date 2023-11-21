@@ -1,0 +1,66 @@
+<div class="modal fade" id="ModalConfirmacion_upload" data-bs-backdrop="static" tabindex="-1" aria-hidden="true" style="padding-right: 17px;">
+    <form method="post" id="form_verificacion_upload">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">                 
+                <div class="modal-c-header">
+                    <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="modaltitle_upload">
+                            <b><i class="fas fa-lock"></i> <span> Verificación de Seguridad </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                    <input type="hidden" name="action" value="validar_datos_administrador">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="username" class="form-label text-sm" style="color: #93959e;">Usuario</label>
+                            <input type="text" id="username_2" name="username_2" class="form-control rounded-pill text-sm"
+                                placeholder="Usuario" value="{{request.user.username}}" style="height: 30px;" readonly>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="password1">Contraseña</label>
+                                <input type="password" id="password_1" name="password_1" placeholder="Ingrese su contraseña"
+                                    class="effect-2 form-control" minlength="6">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="password2">Confirme su contraseña</label>
+                                <input type="password" id="password_2" name="password_2" placeholder="Confirme su contraseña"
+                                    class="effect-2 form-control" minlength="6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{% csrf_token %}
+                            <div class="input-group mt-3 ">
+                                <button type="button" class="contenedor-btn-file btn btn-block text-sm bordeado">
+                                    <i class="far fa-file-code"></i>
+                                    Seleccionar Archivo
+                                    <label for="upload_file"></label>
+                                    <input type="file" class="form-control" name="upload_db" id="upload_file" accept=".json"
+                                        aria-describedby="inputGroupFileAddon04" aria-label="Restaurar">
+                                </button>
+    
+                            </div>
+                        </div>
+                    </div>
+                    </div>                    
+                </div>
+                <div class="d-flex justify-content-center align-items-center" id="spinner_load_bd">
+                </div>
+                <div class="modal-footer text-center border-0 justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-bord"><i class="fas fa-upload"></i> Restablecer Base de
+                        Datos</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i>
+                        Salir</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

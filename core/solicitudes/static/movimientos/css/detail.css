@@ -1,0 +1,33 @@
+table.max-cont th {
+    color: #222a42b3;
+    text-align: inherit;
+    vertical-align: top;
+}
+.table thead th {
+    vertical-align: middle;
+    font-size: 12px;
+    border-top: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 0.590rem;
+    padding-bottom: 0.590rem;
+    line-height: 1;
+}
+.table-wrapper table>tbody>tr>td {
+    padding-top: 0.622rem;
+    padding-bottom: 0.622rem;
+}
+.table>tbody>tr>td {
+    vertical-align: middle;
+    border-top: none;
+    border-bottom: 1px solid #eeeeee;
+}
+.btn_actions{
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    top: 0;
+}

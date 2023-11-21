@@ -1,0 +1,62 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr class="text-uppercase">
+        <th scope="col" style="width: 8%;">Codigo</th>
+        <th scope="col" style="width: 19%;">Tipo Distribucion</th>
+        <th scope="col" style="width: 18%;">Origen</th>
+        <th scope="col" style="width: 18%;">Destino</th>        
+        <th scope="col" style="width: 10%;">Usuario</th>
+        <th scope="col" style="width: 7%;">FECHA</th>
+        <th scope="col" style="width: 3%;">ESTADO</th>
+        <th scope="col" style="width: 12%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block add_modales %}
+        {% include 'approve/approve.html' %}
+{% endblock %}
+
+{% block content_list_before %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <div class="custom-dropdown" id="dropdown-content">
+                        <button class="btn btn-primary input-flat dropdown-btn" id="dropdown-button"  type="button">
+                            <i class="fas fa-sort-amount-down"></i>
+                            Filtrar 
+                        </button>
+                        <ul class="dropdown__menu shadow dropdown__right">
+                            <li class="dropdown__item">
+                               <a class="dropdown__name btnSearch">  <i class="fas fa-calendar-check"></i> Por rangos de fechas</a>
+                            </li>
+                            <li class="dropdown__item">
+                               <a class="dropdown__name btnSearchAll"><i class="fas fa-globe"></i> Ver todos los registros</a>
+                            </li>
+                         </ul> 
+                    </div>                                             
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block javascript_list %}
+    <script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/daterangepicker/daterangepicker.js' %}"
+        type="text/javascript"></script>
+    <script src="{% static 'distribuciones/js/list.js' %}" type="text/javascript"></script>
+    <script src="{% static 'approve/manage_state.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+

@@ -1,0 +1,92 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% block head_form %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<style>
+    .contenedor-btn-file input[type="file"] {
+        appearance: none;
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .contenedor-btn-file>i {
+        margin-right: 15px;
+        color: #186CC3;
+    }
+
+    .contenedor-btn-file label {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+    }
+
+    .contenedor-btn-file.bordeado {
+        background-color: #eaf2ff;
+        border: 1px solid rgb(230, 230, 230) transparent;
+        color: #186CC3 !important;
+    }
+</style>
+{% endblock head_form %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
+        <div class="card h-100">            
+            <div class="card-body">
+                <div class="container p-0 m-0">
+                    <div class="row mb-5 ml-1">
+                        <form action="" method="get" id="form_download">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label" for="basic-default-fullname">Crear Copia de
+                                        Seguridad</label><br>
+                                    <button type="Button" class="btn btn-primary rounded-pill mt-2"
+                                        onclick="abrir_modal_verificacion();"><i
+                                            class="fas fa-download animation__shake"></i> Exportar Base de
+                                        Datos</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <!--SUBIR BASE DE DATOS-->
+                    <div class="row mt-5 ml-1">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label" for="">Restaurar Copia de Seguridad</label><br>
+                                <button type="Button" class="btn btn-primary rounded-pill mt-2"
+                                    onclick="abrir_modal_upload();"><i class="fas fa-upload animation__shake"></i>
+                                    Importar Base de Datos</button>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--MODAL PARA VALIDAR LA CONTRASEÑA PARA HACER LA IMPORTACIÓN-->
+{% include './import.html' %}
+
+<!--MODAL PARA VALIDAR LA CONTRASEÑA PARA HACER EL RESPALDO-->
+{% include './export.html' %}
+
+{% endblock %}
+
+{% block javascript_form %}
+<script type="text/javascript" src="{% static 'respaldo_bd/respaldo_bd.js' %}"></script>
+{% endblock %}

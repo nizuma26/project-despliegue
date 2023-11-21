@@ -1,0 +1,23 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col">Nº</th>
+        <th scope="col">CÓDIGO</th>
+        <th scope="col">UNIDAD</th>
+        <th scope="col">PERSONA SOLICITANTE</th>
+        <th scope="col">TIPO DE SERVICIO</th>
+        <th scope="col">COMPROBANTE</th>
+        <th scope="col">FECHA</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+            
+{% endblock %} 
+
+{% block javascript_list %}
+<script src="{% static 'servicio_tecnico/js/list.js' %}">  </script>
+{% endblock %}
+
+

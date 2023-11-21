@@ -1,0 +1,87 @@
+{% load widget_tweaks %}
+{% load static %}
+<div class="modal fade" id="myModalUnidad" tabindex="-1" role="dialog" aria-hidden="true"  style="padding-right: 17px;">
+    <form id="frmUnidad" action="."  method="post" enctype="multipart/form-data">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">
+      
+              <div class="modal-c-header">      
+                <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                    <h6 class="modal-title md-h title-custom text-white" id="modaltitle3">
+                        <b><i class="fas fa-plus"></i> <span> Creando Nueva Unidad </span></b>
+                    </h6>
+                </ul>      
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="action" type="hidden" value="add">
+                        <input name="id" id="id" type="hidden" value="0">                        
+                        <div class="row"> 
+                            <div class="col-12">
+                              <div class="form-group mb-2">
+                                <label>Nombre</label>
+                                {{ frmUnidad.nombre|attr:'onkeypress:return Solo_Texto(event);'|add_class:'effect-2 form-control' }}
+                              </div>
+                            </div>                             
+                        </div> 
+                        <div class="row"> 
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="form-group mb-2">
+                                <label>Documento</label>
+                                  {{ frmUnidad.rif|add_class:'effect-2 form-control' }}
+                              </div> 
+                              <div class="form-group mb-2">
+                                <label>Teléfono</label>
+                                  {{ frmUnidad.tlf|attr:'onkeypress:return Solo_Numero_ci(event);'|attr:'maxlength:11'|attr:'minlength:11'|add_class:'effect-2 form-control' }}
+                              </div> 
+                              <div class="form-group mb-2">
+                                  <label>Email</label>
+                                  {{ frmUnidad.email|add_class:'effect-2 form-control' }}
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">  
+                              <div class="form-group mb-2">
+                                  <label>Responsable</label>
+                                  {{ frmUnidad.nombrejefe|attr:'onkeypress:return Solo_Texto(event);'|add_class:'effect-2 form-control' }}
+                              </div>
+                              <div class="form-group mb-2">
+                                  <label>Cedúla</label>
+                                  {{ frmUnidad.ced_resp|attr:'onkeypress:return Solo_Numero_ci(event);'|attr:'maxlength:8'|attr:'minlength:8;'|add_class:'effect-2 form-control' }}
+                              </div>
+                              <div class="form-group mb-2">
+                                  <label>Tipo de Unidad</label>
+                                  {{ frmUnidad.tipo_unidad|add_class:'effect-2 form-control' }} 
+                              </div>
+                          </div>                             
+                      </div>                      
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group input-group-sm mb-2">                                        
+                              <label>Dirección</label>
+                              {{ frmUnidad.direccion|add_class:'effect-2 form-control'  }} 
+                          </div>
+                      </div> 
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group input-group-sm">
+                                <div class="custom-control custom-checkbox">
+                                    {{ frmUnidad.solic_almacen}}
+                                    <label for="id_almacen" class="custom-control-label text-muted">Incluye Depósito?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>                                  
+                </div>
+      
+              </div>
+              <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                <button type="submit" class="btn btn-primary btn-bord"><i class="fas fa-save"></i> Guardar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button>      
+              </div>
+            </div>
+          </div>
+    </form>
+</div>
+

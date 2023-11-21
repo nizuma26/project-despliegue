@@ -1,0 +1,49 @@
+{% extends 'report.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-sm-6">
+
+</div>
+{% endblock %}
+
+
+{% block report_content %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary input-flat btnSearch" type="button">
+                        <i class="fas fa-sort-amount-down"></i> Filtrar
+                    </button>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="scroll-h">
+    <table class="table table-bordered table-hover todas table-sm" width="100%" style="font-size: 10px;"
+        id="dtt_Report_Unidad">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 20%;">UNIDAD.</th>
+                <th scope="col" style="width: 17%;">UBICACIÓN FÍSICA</th>
+                <th scope="col" style="width: 28%;">PRODUCTOS</th>
+                <th scope="col" style="width: 7%;">COD. BIEN</th>
+                <th scope="col" style="width: 7%;">ULT. PROC</th>
+                <th scope="col" style="width: 15%;">TIPO PROC.</th>
+                <th scope="col" style="width: 6%;">FECHA</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block javascript_report %}
+<script src="{% static 'inventario/unidad_prod/reportunidad.js' %}"></script>
+{% endblock %}

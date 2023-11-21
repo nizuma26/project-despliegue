@@ -1,0 +1,18 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col" style="width: 4%;">Nro</th>
+        <th scope="col" style="width: 20%;">NOMBRE</th>
+        <th scope="col" style="width: 15%;">RIF</th>
+        <th scope="col" style="width: 20%;">REPRESENTANTE</th>
+        <th scope="col" style="width: 17%;">EMAIL</th>
+        <th scope="col" style="width: 11%;">TELEFONO</th>
+        <th scope="col" style="width: 12%;">LOGO</th>
+    </tr>
+{% endblock %}
+
+
+{% block javascript_list %}
+<script src="{% static 'empresa/js/list.js' %}"></script>
+{% endblock %}

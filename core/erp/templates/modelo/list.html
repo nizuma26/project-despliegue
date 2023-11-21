@@ -1,0 +1,34 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<style>
+    ul.select2-results__options li {
+        font-size: 13px;
+        line-height: 12px;
+    }    
+</style>
+{% endblock %}
+
+{% block columns %}
+<tr>
+    <th scope="col" style="width: 10%;">Nro</th>
+    <th scope="col" style="width: 40%;">Modelo</th>
+    <th scope="col" style="width: 35%;">Marca</th>
+    <th scope="col" style="width: 15%;">Opciones</th>
+</tr>
+{% endblock %}
+{% block add_modales %}
+<div>
+    {% include 'modelo/modal_addmodelo.html' %}
+</div>
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'lib/select2/js/select2.full.min.js' %}"></script>
+  <script src="{% static 'lib/select2/js/i18n/es.js' %}"></script>
+  <script src="{% static 'modelo/js/list.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head_form %}	
+	<link rel="stylesheet" href="{% static 'lib/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/form.css' %}">
+	<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+{% endblock head_form %}
+
+
+{% block content %}
+<!-- Basic Layout -->
+<form method="post" action="." enctype="multipart/form-data" id="formuser" name="formuser">  
+    <div class="row">
+		<div class="col-md-12">
+			<div class="card main_border_top">				
+				<div class="card-body">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="{{ action }}">
+					<input type="hidden" name="id" value="{{ id }}">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-9">							
+								<div class="row">
+									<div class="col-md-6">										
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="nombres">Nombres:</label>
+											<div class="input-group">
+												{{ form.first_name|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Texto(event);' }}
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="apellidos">Apellidos:</label>
+											<div class="input-group input-group-merge">
+												{{ form.last_name|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Texto(event);' }}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row g-2">
+									<div class="col-md-6">
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="cedula">Cedúla</label>
+											<div class="input-group input-group-merge">
+												{{ form.dni|attr:'required'|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Numero_ci(event);'|attr:'maxlength:8'|attr:'minlength:8' }}
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="email">Email</label>
+											<div class="input-group input-group-merge">
+												{{ form.email|attr:'required' }}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row g-2">
+									<div class="col-md-6">
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="nombre de usuario">Nombre de Usuario</label>
+											<div class="input-group input-group-merge">
+												{{ form.username }}
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3 form-password-toggle">
+											<label class="form-label custom_label" for="contraseña">Contraseña</label>
+											<div class="input-group input-group-merge">
+												{{ form.password|attr:'autocomplete:off' }}
+											</div>
+										</div>
+									</div>
+								</div>                                              
+								<div class="row">
+									<div class="col select2-gray">
+										<label class="form-label custom_label" for="id_groups">Rol del Usuario</label>
+										{{ form.groups|attr:'multiple:multiple'}}
+									</div>
+								</div>																		
+								<div class="row g-2 mt-3">
+									<div class="col">
+										<label class="form-label custom_label" for="id_groups">Permisos Individuales</label>
+										<button type="button" class="btn text-center form-control input-style btnPerms bord text-secondary">
+											<span id="lenghtPerm"></span>	
+										</button>									
+									</div>												
+								</div>																	
+								<br>
+								<div class="row g-2" style="margin-top: -10px;">
+									<div class="col">
+										<div class="custom-control custom-checkbox">
+											{{ form.is_active }}
+											<label for="idactive" class="custom-control-label custom_label" for="id_activo">Activo</label>
+										</div>									
+									</div>	
+								</div>																					
+							</div>
+							<div class="col-md-3">
+								<div class="container-fluid">									
+									<div class="container-fluid">										
+										{% if object.image %}
+											<div style="font-size: 12px;" class="mt-1 text-center">
+												<img src="{{object.image.url}}" class="img-fluid img-thumbnail shadow-sm rounded" alt="Imagen" name="imagenPrevisualizacion" id="imagenPrevisualizacion" style="margin-top: 0px; margin-bottom: 2px;" height="200px" width="200px">
+											</div>
+										{% else %}
+											<div style="font-size: 12px;" class="mt-1 text-center">
+												<img src="/media/users/img/sin_imagen_2.png" class="img-fluid shadow-sm rounded" alt="Imagen" name="imagenPrevisualizacion" id="imagenPrevisualizacion" style="margin-top: 0px; margin-bottom: 2px;" height="200px" width="200px">
+											</div>
+										{% endif %}																				
+									</div>								
+								</div>
+								<div class="row mt-3">
+									<div class="col-md-12">
+										{{form.image|add_class:'form-control'|attr:'type:file'|attr:'id:seleccionArchivos'|attr:'style: font-size:12px'}}
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					
+				</div>
+				<div class="card-footer" style="border-top: 1px solid #dee2e6;">
+					<div>
+						<button type="submit" class="btn btn-primary btn-bord">
+							<i class="fas fa-save"></i> Guardar Registro
+						</button>
+						<a href="{{ list_url }}" class="btn btn-out">
+							<i class="fas fa-times"></i> Cancelar
+						</a>
+					</div>					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</form>
+
+{% include './perms.html' %}
+
+{% endblock %}
+{% block javascript_form %}
+<script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/datatables-bs4/js/dataTables.bootstrap4.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'user/js/form.js' %}"></script>
+<script type="application/javascript">    
+	user.data.user_permissions = {{ perms|safe }}
+</script>
+<script type="application/javascript">
+	const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+    $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+    // Escuchar cuando cambie
+    $seleccionArchivos.addEventListener("change", () => {
+    // Los archivos seleccionados, pueden ser muchos o uno
+    const archivos = $seleccionArchivos.files;
+    // Si no hay archivos salimos de la función y quitamos la imagen
+    if (!archivos || !archivos.length) {
+        $imagenPrevisualizacion.src = "";
+        return;
+    }
+    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+    const primerArchivo = archivos[0];
+    // Lo convertimos a un objeto de tipo objectURL
+    const objectURL = URL.createObjectURL(primerArchivo);
+    // Y a la fuente de la imagen le ponemos el objectURL
+    $imagenPrevisualizacion.src = objectURL;
+    });
+</script>
+
+{% endblock %}

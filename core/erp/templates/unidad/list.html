@@ -1,0 +1,28 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 5%;">Nº</th>
+        <th scope="col" style="width: 28%;">Nombre</th>
+        <th scope="col" style="width: 25%;">Representante</th>
+        <th scope="col" style="width: 11%;">Email</th>
+        <th scope="col" style="width: 12%;">Telefono</th>
+        <th scope="col" style="width: 18%;">Tipo Unidad</th>
+        <th scope="col" style="width: 12%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block add_modales %}
+<div id="mostrarmodalunidad">
+    {% include 'unidad/form_modal_unidad.html' %}
+</div>
+{% endblock %}
+
+
+{% block javascript_list %} 
+    <script src="{% static 'unidad/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}
+

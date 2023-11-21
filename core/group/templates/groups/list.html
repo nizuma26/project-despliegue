@@ -1,0 +1,38 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-sm-6">
+  <h5 class="m-0" style="font-family:sans-serif;">
+    <i class="fas fa-search animation__shake" style="color:#000000 ;"></i>                                                                               
+     {{title}}
+  </h5>
+</div>
+{% endblock title %}
+
+{{% block columns %}
+<tr>
+    <th scope="col" style="width: 10%;">Nº</th>
+    <th scope="col" style="width: 50%;">NOMBRE</th>                                                                                      
+    <th scope="col" style="width: 25%;">NÚMERO DE PERMISOS</th>                                                                                      
+    <th class="text-center" scope="col" style="width: 15%;">OPCIONES</th>
+</tr>
+{% endblock %}
+
+
+{% block rows %}
+
+{% endblock %}
+
+{% block add_modales %}
+<div id="mostrarmodalgroup">
+    {% include 'groups/modal_detail.html' %}
+</div>
+{% endblock %}
+
+
+{% block javascript_list %}
+    <script src="{% static 'groups/js/list.js' %}"></script>
+    
+    
+{% endblock %}

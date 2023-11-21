@@ -1,0 +1,46 @@
+{% extends 'report.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-lg-6">
+</div>
+{% endblock %}
+
+{% block report_content %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary input-flat btnSearch" type="button">
+                        <i class="fas fa-sort-amount-down"></i> Filtrar
+                    </button>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="scroll-h">
+    <table class="table table-bordered table-hover table-sm" width="100%" style="font-size: 11px;" id="Report_Tras">
+        <thead>
+            <tr style="font-size: 10px;">
+                <th scope="col">Nº.</th>
+                <th scope="col">PRODUCTO</th>
+                <th scope="col">DESCRIPCION.</th>
+                <th scope="col">TIPO TRASLADO</th>
+                <th scope="col">COD. BIEN</th>
+                <th scope="col">FECHA</th>
+                <!-- <th scope="col">IVA</th> -->
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block javascript_report %}
+<script src="{% static 'report_tras/js/report_tras.js' %}"></script>
+{% endblock %}

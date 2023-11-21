@@ -1,0 +1,62 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+<div class="login-box">
+    <div class="card cascading-card shadow fade_down_animation">
+        <div class="card-c-header mb-2 py-1">
+            <ul class="md-header light-blue text-white darken-3 d-flex align-items-center justify-content-center ">
+                <h4 class="mb-5 mt-2">
+                    <i class="fas fa-sync"></i>
+                </h4>
+                <h5 class="position-absolute" style="margin-bottom: -25px;">
+                    Reseteo de contraseña
+                </h5>
+            </ul>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Ingrese su usuario para resetear su contraseña</p>
+            <div class="box">
+                <form action=".." method="post">
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {% csrf_token %}
+                    <div class="inputBox">
+                        {{ form.username }}
+                        <label>Nombre de Usuario</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-block btn-send text-white">
+                                <i class="fas fa-envelope"></i> Enviar
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-center text-sm mt-2">
+                        <a href="{% url 'usuarios_app:login' %}">Regresar al login </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="application/javascript">
+        $(function () {
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                var parameters = new FormData(this);
+                submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de resetear tu contraseña?', parameters, function () {
+                    Swal.fire({
+                        title: 'Notificación',
+                        text: 'Se ha enviado un correo electrónico con los pasos a seguir para que pueda resetear su contraseña',
+                        icon: 'success',
+                        timer: 4000,
+                        onClose: () => {
+                            location.href = "{% url 'usuarios_app:login' %}";
+                        }
+                    }).then((result) => {
+
+                    });
+                });
+            });
+        });
+    </script>
+</div>
+{% endblock %}

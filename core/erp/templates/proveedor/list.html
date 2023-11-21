@@ -1,0 +1,40 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 5%;">Nº</th>
+        <th scope="col" style="width: 32%;">NOMBRE</th>
+        <th scope="col" style="width: 25%;">DOCUMENTO</th>
+        <th scope="col" style="width: 14%;">Email</th>
+        <th scope="col" style="width: 12%;">Telefono</th>
+        <th scope="col" style="width: 12%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block add_modales %}
+    <div>
+        {% include 'proveedor/form_modalproveedor.html' %}
+    </div>
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'proveedor/js/list.js' %}"></script>
+{% block javascript_list_form %}
+{% endblock %}
+
+{% endblock %}
+
+
+
+
+
+
+
+

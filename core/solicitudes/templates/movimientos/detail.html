@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'lib/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}">
+<link rel="stylesheet" href="{% static 'movimientos/css/detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card main_border_top f-12">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">TIPO DE SOLICITUD:</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.get_tipo_solicitud_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">PRIORIDAD:</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.get_prioridad_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">FECHA:</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.fecha }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">UNIDAD DESPACHADORA</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.unidad_origen.nombre }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">UNIDAD RECEPTORA</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.unidad_destino.nombre }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">USUARIO SOLICITANTE</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.user.get_full_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">ESTADO</label>
+                            <div class="input-group input-group-sm m-0 status">
+                                {{ object.get_estado_display }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm m-0">
+                            <label class="text-muted mb-1">DESCRIPCIÓN:</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.descripcion }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrapper">
+                            <table id="detail" class="table table-hover max-cont table-sm" style="width:100%;">
+                                <thead id="thead_detail">                                    
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                {% if perms.aprobaciones.approve_solicitudes and object.get_estado_display == 'En espera' %}
+                    <button type="button" class="btn btn-primary btn-bord status_change">
+                        <i class="fas fa-file-signature"></i> Gestionar Solicitud
+                    </button>
+                {% endif %}
+                {% if perms.erp.add_salidaproduc and object.get_estado_display == 'APROBADO' %}
+                    <a href="{{url_request.url}}" class="btn btn-primary btn-bord">
+                        <i class="fas fa-file-signature"></i> Generar Movimiento
+                    </a>
+                {% endif %}
+                {% if object.get_estado_display != 'En espera' and motive %}
+                <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-bord" data-toggle="modal" data-target="#modalMotive">
+                        Ver Motivo
+                    </button>
+                {% endif %}
+                <a href="{{ list_url }}" class="btn btn-out">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+            {% include 'approve/approve.html' %}
+            {% include 'motive/motive.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/datatables-bs4/js/dataTables.bootstrap4.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}" type="text/javascript"></script>
+<script src="{% static 'movimientos/js/detail.js' %}" type="text/javascript"></script>
+<script src="{% static 'approve/manage_state.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/checkbox.js' %}" type="text/javascript"></script>
+{% endblock javascript %}

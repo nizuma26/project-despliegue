@@ -1,0 +1,85 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}">
+{% endblock %}
+
+{% block content %}
+<form id="formStock" name="formStock" action="post">
+<div class="row">
+    <div class="col-12">
+        <div class="card main_border_top">
+            <div class="card-body">
+                {% csrf_token %}
+                <input name="action" type="hidden" value="edit">                
+                <div class="container p-0"> 
+                    <div class="row p-0">
+                        <div class="col-lg-12">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Almacén:</label>      
+                                            <div class="input-group">                          
+                                              {{ form.almacenes }}
+                                            </div>                        
+                                        </div>        
+                                    </div>                                                            
+                                </div>
+                                <hr>   
+                                <div class="scroll-h">
+                                    <table id="data_stock" class="table table-hover max-cont table-sm" style="font-size: 11px; width: 100%;">
+                                        <thead>
+                                            <tr style="font-size: 12px;">
+                                                <th scope="col" style="width: 4%;">ID</th>
+                                                <th scope="col" style="width: 44%;">NOMBRE</th>
+                                                <th scope="col" style="width: 15%;">CATEGORIA</th>
+                                                <th scope="col" style="width: 9%;">PRECIO</th>
+                                                <th scope="col" style="width: 6%;">STOCK</th>
+                                                <th scope="col" style="width: 11%;">STOCK MÍNIMO</th>
+                                                <th scope="col" style="width: 11%;">STOCK MÁXIMO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% block rows %}
+                
+                                            {% endblock %}                            
+                                        </tbody>                                   
+                                    </table>
+                                </div>                            
+                            </div>                                
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-primary btn-bord">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <a href="{{ list_url }}" class="btn btn-out btn-sm ml-2">
+                    <i class="fas fa-sync"></i> Actualizar
+                </a>
+            </div>                
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}
+{% block javascript_list %} 
+    <script src="{% static 'lib/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/select2/js/i18n/es.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}" type="text/javascript"></script>
+    <script src="{% static 'control_stock/js/list.js' %}"></script>
+    <script>
+        $('.select2').select2({
+            theme: "bootstrap4",
+            language: 'es',
+        });
+    </script>
+{% endblock %}
+
+
+

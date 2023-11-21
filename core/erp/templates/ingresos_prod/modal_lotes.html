@@ -1,0 +1,85 @@
+{% load widget_tweaks %}
+<div class="modal fade" id="myModalLotes" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="frmLotes" action="." method="post" style="line-height: 12px;">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul
+                        class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="titleLotes">
+                            <b><i class="fas fa-qrcode"></i> <span> Lotes </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="action" type="hidden" value="{{action}}">
+                        <input name="id" id="id" type="hidden" value="0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Código: </label>
+                                    <span id="codeProd" style="font-size: 13px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div>
+                                        <label>Nombre: </label>
+                                        <span id="nameProd" style="font-size: 13px;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                        <label>Descripción: </label>
+                                        <span id="descProd" style="font-size: 13px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                        <label>Categoría: </label>
+                                        <span id="categoryProd" style="font-size: 13px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Número de lote</label>
+                                    {{formLote.nro_lote|add_class:'effect-2 form-control'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="input-group input-group-sm">
+                                    <label for="f_venc" class="text-muted f-14">Fecha de vencimiento:</label>
+                                    <div class="input-group" id="f_venc" data-target-input="nearest">
+                                        {{formLote.fecha_venc|add_class:'effect-2 form-control'}}
+                                        <div class="input-group-append" data-target="#f_venc"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text input-flat p-0 m-0"
+                                                style="width: 25px; height: 31px;"><i
+                                                    class="far fa-calendar-alt m-auto"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center" id="btnLotes">
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

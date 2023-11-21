@@ -1,0 +1,51 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-sm-6">
+  <h5 class="m-0" style="font-family:sans-serif;">
+    <i class="fas fa-search animation__shake" style="color:#000000 ;"></i>                                                                               
+     {{title}}
+  </h5>
+</div>
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5s>Lista de Prueba</h5s>
+    </div>
+    <div class="card-body">
+        <table id="example" class="table display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>ZIP / Post code</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript_list %}
+    <script>
+        var data = [];
+        for (var i = 0; i < 50000; i++) {
+            data.push([i, i, i, i, i]);
+        }
+        
+        $('#example').DataTable({
+            data: data,
+            deferRender: true,
+            // scrollCollapse: true,
+            // scroller: true,
+            // scrollY: 200
+        });
+    </script>   
+    
+{% endblock %}

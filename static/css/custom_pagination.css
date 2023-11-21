@@ -1,0 +1,80 @@
+.dataTables_paginate {
+    margin-top: 0;
+    margin-top: 30px
+}
+.dataTables_paginate a {
+    width: 32px;
+    height: 32px;
+    background: #fff !important;
+    border-radius: 3px !important;
+    color: #666;
+    text-align: center !important;
+    border: none;
+    line-height: 32px;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin: 0 5px !important
+}
+.dataTables_paginate a:hover {
+    box-shadow: 0 5px 10px rgba(59, 118, 239, .3);
+    border: 0 !important;
+    transition: all 0.3s ease !important;
+    color: #fff !important
+}
+.dataTables_paginate a:hover i {
+    color: #fff !important
+}
+
+.dataTables_paginate li.active a {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px !important;
+    box-shadow: 0 5px 10px rgba(59, 118, 239, .3);
+    text-align: center !important;
+    line-height: 32px;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin: 0 5px !important
+}
+div.content-wrapper[main-color="theme_blue"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_blue"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_blue"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #2196F3 !important;
+}
+div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #f59241 !important;
+}
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #14b38a !important;
+}
+div.content-wrapper[main-color="theme_red"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_red"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_red"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #f35a49 !important;
+}
+div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #ff495a !important;
+}
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid .dataTables_paginate .pagination .page-item.active .page-link,
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a,
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid .dataTables_paginate .pagination .page-item .page-link:hover{
+    background: #2e82f9 !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover a {
+    box-shadow: 0 5px 10px rgba(59, 118, 239, .3);
+    border: 0 !important;
+    transition: all 0.4s ease !important;
+    color: #fff !important
+}
+
+.dataTables_paginate a.current {
+    box-shadow: 0 5px 10px rgba(59, 118, 239, .3) !important;
+    border: 0 !important;
+    color: #fff !important
+}

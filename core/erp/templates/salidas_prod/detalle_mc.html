@@ -1,0 +1,108 @@
+<div class="modal fade" id="modal_detail_mc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="frmDetProd" action="."  method="post" enctype="multipart/form-data">
+        <div class="modal-dialog modal-xl cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">      
+                    <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="detail_mc">
+                            <b><i class="fas fa-search"></i> <span> gg:</span></b>
+                        </h6>
+                    </ul> 
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-2 text-dark" style="font-size: 13px;">
+						<div class="col-md-3">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Concepto: </span>
+                                <span id="concept_mc"></span>                                                             
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Fecha de Registro:</span>
+                                <span id="date_mc"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Usuario:</span>
+                                <span id="user_mc"></span>                                
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                               
+                                <span style="font-weight: bold;">Comprobante:</span>
+                                <span id="comprob_mc"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Nº Comprobante:</span>
+                                <span id="nro_comprob_mc"></span>                                
+                            </div>
+                        </div>                                      
+					</div>
+                    <div class="row text-dark" style="font-size: 13px;">
+						<div class="col-md-3">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Almacén: </span>
+                                <span id="almacen_mc"></span>                                                             
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group clearfix">                               
+                                <span style="font-weight: bold;">Jefe de Depósito:</span>
+                                <span id="resp_almacen_mc"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Destino:</span>
+                                <span id="destino_mc"></span>                                
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Responsable:</span>
+                                <span id="resp_destino_mc"></span>                                
+                            </div>
+                        </div>                                                             
+					</div>
+                    <div class="row mt-1 mb-2 text-dark" style="font-size: 13px;">
+                        <div class="col-md-3">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Estado:</span>
+                                <span id="status_mc"></span>                                
+                            </div>
+                        </div> 
+                        <div class="col-md-9">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Observación: </span>
+                                <span id="obs_mc"></span>                         
+                            </div>
+                        </div>
+                    </div>	
+                    <div class="scroll-h">
+                        <table class="table max-cont table-hover table-sm" id="tblDetalleMc">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 32%; font-size: 12px;">PRODUCTO</th>
+                                <th scope="col" style="width: 21%; font-size: 12px;">CATEGORÍA</th>
+                                <th scope="col" style="width: 10%; font-size: 12px;">PRECIO BS</th>
+                                <th scope="col" style="width: 9%; font-size: 12px;">CANTIDAD</th>
+                                <th scope="col" style="width: 9%; font-size: 12px;">Nº LOTE</th>
+                                <th scope="col" style="width: 19%; font-size: 12px;">FECHA DE VENCIMIENTO</th>
+                            </tr>
+                            </thead>
+                            <tbody style="font-size: 12px;">
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>
+                <div class="card-footer py-1 text-center" style="background-color: #EFEBE9;">
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

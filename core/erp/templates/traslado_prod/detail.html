@@ -1,0 +1,97 @@
+<div id="mostrarmodalDetProdTraslado">
+    <div class="modal fade" id="detail_traslado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form id="frmDetProdTras" action="."  method="post" enctype="multipart/form-data">
+            <div class="modal-dialog modal-xl cascading-modal mt-5" style="max-width: 85%;" role="document">
+                <div class="modal-content">
+                    <div class="modal-c-header">      
+                        <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                            <h6 class="modal-title md-h title-custom text-white" id="title_detail_tras">
+                                <b><i class="fas fa-search"></i> <span> Detalle del Traslado:</span></b>
+                            </h6>
+                        </ul> 
+                    </div> 
+                    <div class="modal-body">
+                        <div class="row mt-2 text-dark" style="font-size: 13px;">
+                            <div class="col-md-4">
+                                <div class="form-group clearfix">
+                                    <span style="font-weight: bold;">Concepto de Movimiento: </span>
+                                    <span id="concept"></span>                                                             
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">                                
+                                    <span style="font-weight: bold;">Fecha:</span>
+                                    <span id="date"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">                                
+                                    <span style="font-weight: bold;">Usuario:</span>
+                                    <span id="user"></span>                                
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group clearfix">                               
+                                    <span style="font-weight: bold;">Estado:</span>
+                                    <span id="status"></span>
+                                </div>
+                            </div>                                                             
+                        </div>
+                        <div class="row mt-2 text-dark" style="font-size: 13px;">
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">
+                                    <span style="font-weight: bold;">Origen: </span>
+                                    <span id="origen"></span>                                                             
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">                               
+                                    <span style="font-weight: bold;">Responsable:</span>
+                                    <span id="resp_origen"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">                                
+                                    <span style="font-weight: bold;">Destino:</span>
+                                    <span id="destino"></span>                                
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group clearfix">                                
+                                    <span style="font-weight: bold;">Responsable:</span>
+                                    <span id="resp_destino"></span>                                
+                                </div>
+                            </div>                                      
+                        </div>
+                        <div class="row mt-1 mb-2 text-dark" style="font-size: 13px;">
+                            <div class="col-md-12">
+                                <div class="form-group clearfix">
+                                    <span style="font-weight: bold;">Observación: </span>
+                                    <span id="observ"></span>                         
+                                </div>
+                            </div>
+                        </div>	
+                        <div class="scroll-h">
+                            <table class="table max-cont table-hover table-sm f-12" id="tblDetalleProdTras">
+                                <thead class="text-uppercase">
+                                    <tr >
+                                        <th scope="col" style="width: 42%; font-size: 12px;">Producto</th>
+                                        <th scope="col" style="width: 13%; font-size: 12px;">Código de Bien</th>
+                                        <th scope="col" style="width: 22%; font-size: 12px;">Ubicación Física Origen.</th>
+                                        <th scope="col" style="width: 23%; font-size: 12px;">Ubicicaión Física Destino.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>                       
+                    </div>
+                    <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                        <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button>      
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

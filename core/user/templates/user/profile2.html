@@ -1,0 +1,162 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+<div class="col-lg-6">
+
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Basic Layout -->
+<form method="post" action="." enctype="multipart/form-data" id="formprofile" name="formprofile">  
+    <div class="card">
+		<div class="card-header">
+			<h3 class="card-title">					
+				<i class="fas fa-edit"></i>				
+				<b>{{title}}</b>
+			</h3>
+		</div>
+		<div class="card-body">
+			{% csrf_token %}
+            <input type="hidden" name="action" value="{{ action }}">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">
+									<b><i class="fas fa-user"></i> Datos del Usuario</b>
+								</h3>
+							</div>
+							<div class="card-body">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col">							
+											<div class="row g-2">
+												<div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="nombres">Nombres:</label>
+														<div class="input-group input-group-merge">
+															{{ form.first_name|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+												<div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="apellidos">Apellidos:</label>
+														<div class="input-group input-group-merge">
+															{{ form.last_name|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row g-2">
+												<div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="cedula">Cedúla</label>
+														<div class="input-group input-group-merge">
+															{{ form.dni|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+												<div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="email">Email</label>
+														<div class="input-group input-group-merge">
+															{{ form.email|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row g-2">
+												<div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="nombre de usuario">Nombre de Usuario</label>
+														<div class="input-group input-group-merge">
+															{{ form.username|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+                                                <div class="col">
+													<div class="mb-3 form-password-toggle">
+														<label class="form-label" for="contraseña">Contraseña</label>
+														<div class="input-group input-group-merge">
+															{{ form.password|add_class:'form-control'|attr:'autocomplete:off' }}
+														</div>
+													</div>
+												</div>
+											</div>                                          
+										</div>
+									</div>																	
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-lg-4">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title"><b><i class="fas fa-file-image"></i> Imagen</b></h3>
+							</div>
+							<div class="card-body">								
+								<div class="container-fluid">									
+									<div class="container-fluid">										
+										{% if object.image %}
+											<div style="font-size: 12px;" class="mt-1 text-center">												
+												<img src="{{object.image.url}}" class="img-fluid img-circle" alt="Imagen" name="imagenPrevisualizacion" id="imagenPrevisualizacion" style="margin-top: 0px; margin-bottom: 2px;" height="150px" width="150px">
+											</div>
+										{% else %}
+											<div style="font-size: 12px;" class="mt-1 text-center">												
+												<img src="/static/img/user_img.jpg" class="img-fluid img-circle" alt="Imagen" name="imagenPrevisualizacion" id="imagenPrevisualizacion" style="margin-top: 0px; margin-bottom: 2px;" height="150px" width="150px">
+											</div>
+										{% endif %}											
+									</div>
+								</div>
+							</div>
+							<div class="card-footer py-2">
+								{{form.image|add_class:'form-control'|attr:'type:file'|attr:'id:seleccionArchivos'|attr:'style: font-size:12px'}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer py-2" style="border-top: 1px solid #dee2e6;">
+			<button type="submit" class="btn btn-primary btn-sm">
+				<i class="fas fa-save"></i> Guardar
+			</button>
+			<a href="{{ list_url }}" class="btn btn-danger btn-sm">
+				<i class="fas fa-times"></i> Cancelar
+			</a>
+		</div>
+	</div>
+	
+	
+</form>
+
+{% endblock %}
+{% block javascript_form %}
+<script src="{% static 'user/js/form2.js' %}"></script>
+<script type="application/javascript">
+	const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+    $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+    // Escuchar cuando cambie
+    $seleccionArchivos.addEventListener("change", () => {
+    // Los archivos seleccionados, pueden ser muchos o uno
+    const archivos = $seleccionArchivos.files;
+    // Si no hay archivos salimos de la función y quitamos la imagen
+    if (!archivos || !archivos.length) {
+        $imagenPrevisualizacion.src = "";
+        return;
+    }
+    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+    const primerArchivo = archivos[0];
+    // Lo convertimos a un objeto de tipo objectURL
+    const objectURL = URL.createObjectURL(primerArchivo);
+    // Y a la fuente de la imagen le ponemos el objectURL
+    $imagenPrevisualizacion.src = objectURL;
+    });
+</script>
+{% endblock %}

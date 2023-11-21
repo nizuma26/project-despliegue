@@ -1,0 +1,48 @@
+{% load static %}
+<div class="modal fade" id="myModalStatusIng" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="frmStatusIng" action="."  method="post">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">
+                    <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="status_title">
+                            <b><i class="fas fa-pen"></i> <span>  Cambio de Estado:
+                            </span></b>
+                        </h6>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="action" type="hidden" value="edit">
+                        <input name="id" id="id" type="hidden" value="0">
+                        <div class="col mx-1">
+                            <div class="row"> 
+                                <div class="col-12"> 
+                                    <div class="form-group mb-1">
+                                        <div class="txt_field f-14">
+                                            <select required class="effect-2 form-control custom-select-sm" name="estado" id="estado_ing">
+                                                <option value="DIS">En Creación</option>
+                                                <option value="APR">Aprobado</option>
+                                                <option value="REC">Rechazado</option>
+                                            </select>
+                                            <span class="focus-border"></span>
+                                            <label>Cambiar estado</label>     
+                                        </div>                               
+                                        </div>
+                                    </div>    
+                                </div>    
+                            </div>   
+                        </div>
+                    
+                    </div>
+                    <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-sm btn-bord"><i class="fas fa-save"></i> Guardar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button> 
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>

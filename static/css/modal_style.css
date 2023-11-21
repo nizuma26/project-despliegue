@@ -1,0 +1,150 @@
+.modal-dialog.cascading-modal .modal-c-header .md-header {
+    display: -webkit-box ;
+    display: -ms-flexbox;
+    display: flex;
+    margin: -1.5rem 1rem 0 1rem;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000
+}
+div.content-wrapper[main-color="theme_blue"] section.content div.container-fluid ul.md-header{
+  background-color: #2196F3;
+}
+div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid ul.md-header{
+  background-color: #f59241;
+}    
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid ul.md-header{
+  background-color: #14b38a;
+}    
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid ul.md-header{
+  background-color: #2e82f9;
+}    
+div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid ul.md-header{
+  background-color: #ff495a;
+}    
+div.content-wrapper[main-color="theme_red"] section.content div.container-fluid ul.md-header{
+  background-color: #f35a49;
+}
+.modal-content{
+  border-radius: 0.60rem;
+}
+.modal-backdrop.fade {
+    opacity: 0
+}
+.modal-backdrop.show {
+    opacity: .5
+}
+.md-header {
+    position: relative;
+    z-index: 1;
+    padding: 0.7rem;
+    margin-right: 1rem;
+    margin-bottom: -20px;
+    margin-left: 1rem;
+    border: 0;
+    border-radius: 0.25rem;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+}
+@media(max-width: 500.98px) {
+  .md-header {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+  }
+}
+.md-h {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-left: 2px;
+    list-style: none;
+}
+form .txt_field{
+    position: relative;
+    margin: 5px 0;
+  }
+  input.effect-2, select.effect-2{
+    height: calc(2.01rem + 2px);
+  }
+  input.effect-2, select.effect-2,
+  textarea.effect-2{
+    font-size: 13px;
+    color: #64727f;
+    border: 1px solid #e1e5e9;
+    border-radius: 0.22rem;
+    outline: none;
+  }
+  .modal-body .form-group label{
+    font-size: 13px;
+    color: #828d97;
+  }
+  .modal-body .form-group{
+    margin-bottom: 0.6rem;
+  }
+.txt_field span::before{
+    content: '';
+    position: absolute;
+    top: 39px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #49b6ff;
+    transition: 0.3s;
+  }
+  .txt_field select:focus{
+    border-bottom: none;
+  }
+.txt_field input:focus ~ label,
+.txt_field select:focus ~ label{
+  top: -1.5px;
+  color: #309be2;
+  font-size: 11px;
+}
+.txt_field textarea:focus ~ label{
+  top: -5.9px;
+  color: #309be2;
+  font-size: 11px;
+}
+.txt_field input:focus ~ span::before,
+.txt_field select:focus ~ span::before,
+.txt_field textarea:focus ~ span::before{
+    width: 100%;
+    transition: 0.3s;
+    left: 0;
+}  
+.txt_field input.input-has-text ~ span,
+.txt_field select.input-has-text ~ span,
+.txt_field textarea.input-has-text ~ span{
+  background-color: #f0f0f0;
+}
+.txt_field input.input-has-text ~ label,
+.txt_field select.input-has-text ~ label{
+  top: -1.5px;
+  color: #818181;
+  font-size: 11px;
+}
+.txt_field textarea.input-has-text ~ label{
+  top: -5.9px;
+  color: #818181;
+  font-size: 11px;
+}
+.txt_field div.add {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  padding: 0.725rem 0;
+  color: #309be2;
+  font-size: 14px;
+}
+  

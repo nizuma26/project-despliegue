@@ -1,0 +1,64 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block title %}
+<div class="col-lg-6">
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-chart-bar"></i>
+                <b>{{ title }}</b>
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+                        <div class="input-group">
+                            {{ form.date_range }}
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btnSearch" style="height: 32px; background-color: rgb(26, 136, 247);" type="button">
+                                    <i class="fas fa-calendar-check"></i> Buscar por rangos
+                                </button>                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-bordered table-hover table-sm" width="100%" style="font-size: 11px;" id="report_desinc">
+                <thead>
+                <tr style="font-size: 10px;">
+                    <th scope="col">Nº.</th>
+                    <th scope="col">PRODUCTOS</th>                    
+                    <th scope="col">DESCRIPCIÓN.</th>                    
+                    <th scope="col">TIPO DESINCORPORACIÓN</th>
+                    <th scope="col">CÓDIGO DE BIEN</th>
+                    <th scope="col">FECHA</th>
+                    <!-- <th scope="col">IVA</th> -->                   
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer" style="border-top: 1px solid #dee2e6;">
+            <a href="{{ list_url }}" class="btn" style="background-color: rgb(47, 184, 115);">
+                <i class="fas fa-sync"></i> Actualizar
+            </a>
+        </div>
+    </div>
+    {% block add_modales %}
+    
+    {% endblock %}
+{% endblock %}
+
+{% block javascript_list %} 
+    <script src="{% static 'desinc_unidad/js/report_desinc.js' %}"></script>
+{% endblock %}

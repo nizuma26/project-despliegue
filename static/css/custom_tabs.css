@@ -1,0 +1,80 @@
+ul.nav-tabs .nav-item a.btn-effect{
+    color: #828d97;
+}
+.btn-effect {
+    background: #fff;
+    padding: .5rem .75rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+}
+
+.btn-effect:hover {
+    color: #fff !important;
+}
+
+.btn-effect::before {
+    position: absolute;
+    z-index: -1;
+    border: 0px;
+    border-radius: 100%;
+    display: block;
+    left: -12%;
+    right: -12%;
+    top: 15%;
+    bottom: auto;
+    height: 70%;
+    content: "";
+    transform: scale(0);
+    transition: all 0.2s;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active::before,.nav-link:hover::before {
+    top: 0;
+    height: 100%;
+    transition: all 202ms ease-out;
+    transform: scale(1);
+    border-radius: .25rem;
+}
+div.content-wrapper[main-color="theme_blue"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #f59241;
+    border-color: #f59241;
+}
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #14b38a;
+    border-color: #14b38a;
+}
+div.content-wrapper[main-color="theme_red"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #f35a49;
+    border-color: #f35a49;
+}
+div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #ff495a;
+    border-color: #ff495a;
+}
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid .nav-tabs .btn-effect::before{
+    background-color: #2e82f9;
+    border-color: #2e82f9;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #fff !important;
+    box-shadow: 0 13px 6px -11px rgba(0, 0, 0, 0.25)
+}
+.nav-tabs .nav-link {
+    margin: 2px !important;
+    border: 0px solid transparent !important;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs {
+    border-bottom: 0px !important;
+}

@@ -1,0 +1,89 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr class="f-12 text-uppercase">
+        <th scope="col" style="width: 14%;">Usuario</th>
+        <th scope="col" style="width: 10%;">Codigo</th>
+        <th scope="col" style="width: 26%;">Tipo Desincorporación</th>
+        <th scope="col" style="width: 26%;">Almacén</th>        
+        <th scope="col" style="width: 8%;">F-Desinc.</th>
+        <th scope="col" style="width: 6%;">Stado</th>
+        <th scope="col" style="width: 10%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block add_modales %}
+    <div id="modalDetProdDesincorp">
+        <div class="modal fade" id="myModalDetProdDesincorp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form id="frmDetProdDesincorp" action="."  method="post" enctype="multipart/form-data" style="line-height: 12px;">
+                <div class="modal-dialog" style="max-width: 85%;" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header py-1" style="background-color: #688694;">
+                        <h5 class="modal-title"  id="modaltitledetalledesincorp" style="color:white;">
+                                <b><i class="fas fa-shopping-cart"></i>  <span>  </span></b>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered table-hover table-sm" id="tblDetalleProdDesincorp" style="font-size: 12px;">
+                                <thead style="background-color: #688694;">
+                                    <tr>
+                                        <th>PRODUCTO</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>CATEGORÍA</th>
+                                        <th>PRECIO</th>
+                                        <th>CANTIDAD</th>                                       
+                                        <th>SUBTOTAL</th>                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer py-1 text-center" style="background-color: #EFEBE9;">
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div id="modalStatusDesincAlm">
+        {% include 'desincorporaciones/bienes_en_deposito/modal_status.html' %}
+    </div>
+{% endblock %}
+
+{% block content_list_before %}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+                <div class="input-group">
+                    {{ form.date_range }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary btn-sm btnSearch input-flat" type="button">
+                            <i class="fas fa-calendar-check"></i> Filtrar
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock %}
+
+{% block javascript_list %} 
+    <script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/daterangepicker/daterangepicker.js' %}"
+        type="text/javascript"></script>
+    <script src="{% static 'desincorporaciones/bienes_en_deposito/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+

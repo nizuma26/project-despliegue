@@ -1,0 +1,69 @@
+ul.select2-results__options li {
+    font-size: 12px;
+    line-height: 14px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.select2-container .select2-selection--single {
+    border-radius: 2px !important;
+    height: 31px !important;
+}
+table.max-cont th {
+    color: #222a42b3;
+    text-align: inherit;
+    vertical-align: top;
+}
+.table thead th {
+    vertical-align: middle;
+    font-size: 12px;
+    border-top: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 0.590rem;
+    padding-bottom: 0.590rem;
+    line-height: 1;
+}
+.table-wrapper table>tbody>tr>td {
+    padding-top: 0.622rem;
+    padding-bottom: 0.622rem;
+}
+.table>tbody>tr>td {
+    vertical-align: middle;
+    border-top: none;
+    border-bottom: 1px solid #eeeeee;
+}
+@media screen and (min-height: 520px) {
+    .scroll-s table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .scroll-s tbody {
+        display: block;
+        max-height: 300px;
+        /* ajusta la altura máxima según tus necesidades */
+        overflow-y: auto;
+    }
+
+    .scroll-s tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    .scroll-s::-webkit-scrollbar {
+        width: 7px !important;
+        height: 6px !important;
+    }
+
+    .scroll-s::-webkit-scrollbar-thumb {
+        background: #8296a8 !important;
+        border-radius: 7px !important;
+    }
+
+    .scroll-s table thead td:first-child {
+        width: 100%;
+    }
+
+}

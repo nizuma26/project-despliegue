@@ -1,0 +1,64 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr style="font-size: 12px;">
+        <th scope="col" style="width: 2%;">Nº</th>
+        <th scope="col" style="width: 9%;">CÓDIGO</th>
+        <th scope="col" style="width: 19%;">TIPO DE DISTRIBUCIÓN</th>
+        <th scope="col" style="width: 20%;">ORIGEN</th>
+        <th scope="col" style="width: 20%;">DESTINO</th>        
+        <th scope="col" style="width: 8%;">FECHA</th>
+        <th scope="col" style="width: 8%;">TOTAL</th>
+        <th scope="col" style="width: 3%;">STATUS</th>
+        <th scope="col" style="width: 11%;">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block add_modales %}
+    <div id="mostrarmodalDetProd">
+        {% include './detalle_bm.html' %}
+    </div>
+    <div id="mostrarDetalleMc">
+        {% include './detalle_mc.html' %}
+    </div>
+{% endblock %}
+
+{% block content_list_before %}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+                <div class="input-group">
+                    {{ form.date_range }}
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-primary" data-toggle="dropdown"  type="button">
+                            <i class="fas fa-sort-amount-down"></i> Filtrar
+                        </button>
+                        <div class="dropdown-menu border-0 shadow">
+                            <a class="dropdown-item btnSearch">
+                                <i class="fas fa-calendar-check"></i> Por rangos de fechas
+                            </a>                                    
+                            <a class="dropdown-item btnSearchAll">
+                                <i class="fas fa-calendar-check"></i> Ver todos los registros
+                            </a>
+                        </div>                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock %}
+
+{% block javascript_list %} 
+    <script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/daterangepicker/daterangepicker.js' %}"
+        type="text/javascript"></script>
+    <script src="{% static 'salida_prod/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+

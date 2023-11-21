@@ -1,0 +1,46 @@
+ul.select2-results__options li {
+    font-size: 11px;
+    line-height: 12px;
+    padding: 0px;
+    margin: 0px;
+}
+.select2-selection__rendered {
+    line-height: 25px !important;
+}
+.select2-container .select2-selection--single {
+    height: 30px !important;
+    border-radius: 0px !important;
+}
+table.max-cont th {
+    color: #222a42b3;
+    text-align: inherit;
+    vertical-align: top;
+}
+.table thead th {
+    vertical-align: middle;
+    font-size: 12px;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 0.590rem;
+    padding-bottom: 0.590rem;
+    line-height: 1;
+}
+.table>tbody>tr>td {
+    vertical-align: middle;
+    padding-top: 0.425rem;
+    padding-bottom: 0.425rem;
+    border-top: none !important;
+    border-bottom: 1px solid #eeeeee !important;
+}
+/* div.content-wrapper[main-color="theme_orange"] section.content div.container-fluid .table .checkbox-container input:checked ~ .checkmark{
+    background-color: #f59241;
+}
+div.content-wrapper[main-color="theme_green"] section.content div.container-fluid .table .checkbox-container input:checked ~ .checkmark{
+    background-color: #14b38a;
+} */
+/* div.content-wrapper[main-color="theme_pink"] section.content div.container-fluid .table .checkbox-container input:checked ~ .checkmark{
+    background-color: #ff7588;
+}
+div.content-wrapper[main-color="theme_purple"] section.content div.container-fluid .table .checkbox-container input:checked ~ .checkmark{
+    background-color: #2e82f9;
+} */

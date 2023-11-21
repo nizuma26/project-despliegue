@@ -1,0 +1,130 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <form method="post" action="." enctype="multipart/form-data" id="formempresa" name="formempresa">
+        <div class="card">            
+            <div class="card-body">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="{{ action }}">
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="email">Nombre:</label>
+                    {{ form.nombre|add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Texto(event);' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Tipo de Documento:</label>
+                    {{ form.tipo_docu|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Documento:</label>
+                    {{ form.documento|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Dedicación:</label>
+                    {{ form.dedicacion|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Telefono Local:</label>
+                    {{ form.tlflocal|add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Numero_ci(event);'|attr:'maxlength:11'|attr:'minlength:11' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    {{ form.email|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Pagina Web:</label>
+                    {{ form.web|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Misión:</label>
+                    {{ form.mision|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Visión:</label>
+                    {{ form.vision|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Logo:</label>
+                    {{ form.logo|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Dirección:</label>
+                    {{ form.direccion|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Representante:</label>
+                    {{ form.representante|add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Texto(event);' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Cedula:</label>
+                    {{ form.ced_repre|add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return Solo_Numero_ci(event);'|attr:'maxlength:8'|attr:'minlength:8' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Nombre del Impuesto:</label>
+                    {{ form.nameimpuesto|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Porcentaje del Impuesto:</label>
+                    {{ form.iva|add_class:'form-control'|attr:'autocomplete:off' }}
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-flat">
+                    <i class="fas fa-save"></i> Guardar registro
+                </button>
+                <a href="{{ list_url }}" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    </form>
+    <script>
+        {% if form.errors %}
+            var errors = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n';
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: 'error'
+            });
+        {% endif %}
+
+        
+
+        // $('form').on('submit', function (e) {
+        //     e.preventDefault();
+        //     var parameters = new FormData(this);
+        //     submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+        //         location.href = '{{ list_url }}';
+        //     });
+        // });
+    </script>
+
+{% endblock %}
+
+{% block javascript_form %}
+<script src="{% static 'empresa/js/form.js' %}"></script>
+{% endblock %}
+

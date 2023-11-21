@@ -1,0 +1,42 @@
+{% load static %}
+<div class="modal fade" id="myModalModelos" tabindex="-1" data-backdrop="static" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
+    <form id="frmModelos" class="f-13" action="."  method="post" enctype="multipart/form-data">
+        <div class="modal-dialog cascading-modal mt-5" role="document">
+            <div class="modal-content">
+              <div class="modal-c-header">      
+                <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                    <h6 class="modal-title md-h title-custom text-white" id="titlemodelo">
+                        <b><i class="fas fa-plus"></i> <span> gg </span></b>
+                    </h6>
+                </ul>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {% csrf_token %}
+                        <input name="action" type="hidden" value="add">
+                        <input name="id" id="id" type="hidden" value="0">
+                        <input name="marca_id" id="marca_id" type="hidden" value="">
+                        <div class="row"> 
+                            <div class="col-12"> 
+                                <div class="form-group">
+                                    <label>Modelo</label>
+                                    {{ frmModelos.modelo }}
+                                </div>  
+                                <div class="form-group">
+                                    <label>Buscar Marca</label>
+                                    {{ frmModelos.marcas }}
+                                </div>                                        
+                            </div>
+                        </div> 
+                    </div>                                  
+                </div>
+      
+              </div>
+              <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                <button type="submit" class="btn btn-primary btn-bord"><i class="fas fa-save"></i> Guardar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button>      
+              </div>
+            </div>
+          </div>
+    </form>
+</div>
+

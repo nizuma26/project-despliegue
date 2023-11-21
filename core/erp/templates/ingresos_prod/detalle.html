@@ -1,0 +1,102 @@
+<div class="modal fade" id="myModalDetProd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="frmDetProd" action="."  method="post">
+        <div class="modal-dialog modal-xl cascading-modal mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-c-header">      
+                    <ul class="md-h md-header tabs-2 light-blue darken-3 d-flex align-items-center justify-content-center">
+                        <h6 class="modal-title md-h title-custom text-white" id="incorp_title">
+                            <b><i class="fas fa-search"></i> <span> Detalle de la Incorporación:</span></b>
+                        </h6>
+                    </ul> 
+                </div> 
+                <div class="modal-body">
+                    <div class="row mt-2 text-dark" style="font-size: 13px;">
+						<div class="col-md-3">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Tipo de Incorporación: </span>
+                                <span id="tipo_incorp"></span>                                                             
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Fecha:</span>
+                                <span id="fecha"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Usuario:</span>
+                                <span id="usuario"></span>                                
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                               
+                                <span style="font-weight: bold;">Comprobante:</span>
+                                <span id="t_comprob"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Nº Comprobante:</span>
+                                <span id="nro_comprob"></span>                                
+                            </div>
+                        </div>                                      
+					</div>
+                    <div class="row mt-2 text-dark" style="font-size: 13px;">
+						<div class="col-md-3">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Almacén: </span>
+                                <span id="almacen"></span>                                                             
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group clearfix">                               
+                                <span style="font-weight: bold;">Jefe de Depósito:</span>
+                                <span id="jefe"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Proveedor:</span>
+                                <span id="prov"></span>                                
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group clearfix">                                
+                                <span style="font-weight: bold;">Estado:</span>
+                                <span id="status"></span>                                
+                            </div>
+                        </div>                                      
+					</div>
+                    <div class="row mt-1 mb-2 text-dark" style="font-size: 13px;">
+                        <div class="col-md-12">
+                            <div class="form-group clearfix">
+                                <span style="font-weight: bold;">Observación: </span>
+                                <span id="obs"></span>                         
+                            </div>
+                        </div>
+                    </div>			
+                    <div class="scroll-h">
+                        <table class="table max-cont table-hover table-sm" id="tblDetalleProd" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCTO</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>PRECIO</th>
+                                    <th>CANTIDAD</th>
+                                    <th>SUBTOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 12px;">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer mb-2 py-0 border-0 d-flex align-items-center justify-content-center">
+                    <button type="button" data-dismiss="modal" class="btn btn-out"><i class="fas fa-sign-out-alt"></i> Salir</button>      
+                </div>	
+            </div>
+        </div>
+    
+</div>

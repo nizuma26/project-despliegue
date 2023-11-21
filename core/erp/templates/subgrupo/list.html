@@ -1,0 +1,27 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 13%;">Nº SubGrupo</th>
+        <th scope="col" style="width: 10%;">Seccion</th>
+        <th scope="col" style="width: 10%;">Código</th>
+        <th scope="col" style="width: 37%;">Denominación</th>
+        <th scope="col" style="width: 20%;">Grupo</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+{% block add_modales %}
+    <div>
+        {% include 'subgrupo/modal_addsubgrupo.html' %}
+    </div>
+{% endblock %}
+{% block javascript_list %}
+<script src="{% static 'subgrupo/js/list.js' %}"></script>
+{% endblock %}

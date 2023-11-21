@@ -1,0 +1,316 @@
+{% load widget_tweaks %}
+{% load static %}
+<div class="modal fade" id="myModalEmpresa" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <form method="post" action="." enctype="multipart/form-data" id="formempresa" name="formempresa" style="font-size: 13px;">
+      <div class="modal-dialog" style="max-width: 75%;" role="document">
+        <div class="modal-content">
+          <div class="modal-header py-1" style="background-color: #6c757d;">
+            <h5 class="modal-title" id="modaltitle" style="color: white;">
+              <b><i class="fas fa-search"></i> <span>   </span></b>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+                {% csrf_token %}
+                <input name="action" type="hidden" value="edit">
+                <input name="id" id="id" type="hidden" value="0">
+                  <div class="row mx-1">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pr-1">
+                          <nav>
+                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-datosgene-tab" data-toggle="tab" data-target="#nav-datosgene" type="button" role="tab" aria-controls="nav-datosgene" aria-selected="true">Datos Empresa</button>
+                                <button class="nav-link" id="nav-datosadicio-tab" data-toggle="tab" data-target="#nav-datosadicio" type="button" role="tab" aria-controls="nav-datosadicio" aria-selected="false">Datos Adicionales</button>
+                                <button class="nav-link" id="nav-ajustes-tab" data-toggle="tab" data-target="#nav-ajustes" type="button" role="tab" aria-controls="nav-ajustes" aria-selected="false">Ajustes</button>
+                              </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-datosgene" role="tabpanel" aria-labelledby="nav-datosgene-tab">
+                              <div class="row mt-4">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group input-group-sm">
+                                          <label for="codigo" class="control-label text-muted" style="margin-bottom: 1px;">Codigo</label>
+                                          {{form.codigo|attr:"autocomplete:off"}}
+                                          {% for error in form.codigo.errors %}
+                                            <p class="cell alert alert-danger">
+                                              {{ error|escape }}
+                                            </p>
+                                          {% endfor %}
+                                        </div>
+                                    </div>    
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                        <div class="form-group input-group-sm" id="grupo__nombre">
+                                          <label for="nombre" class="control-label text-muted" style="margin-bottom: 1px;">Nombre de la empresa</label>
+                                          <div class="input-group">
+                                          {{form.nombre}}
+                                          </div>
+      
+                                        </div>
+                                      </div>
+
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group input-group-sm">
+                                          <label for="tipo_docu" class="control-label text-muted" style="margin-bottom: -1px;">Tipo Documento</label>
+                                          {{form.tipo_docu}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="documento" class="text-muted" style="margin-bottom: -1px;">Documento</label>
+                                          {{ form.documento }}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="direccion" class="text-muted" style="margin-bottom: -1px;">Dirección</label>
+                                        {{ form.direccion }}
+                                      </div>
+                                    </div>
+                                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group input-group-sm">
+                                          <label for="dedicacion" class="text-muted" style="margin-bottom: -1px;">Dedicacion</label>
+                                          {{ form.dedicacion }}
+                                        </div>
+                                      </div>
+                                  </div>
+                                   
+                                  <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="form-group">
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" style="height: 25px;"><i class="fas fa-phone"></i></span>
+                                          </div>
+                                          {{ form.tlflocal }}
+                                        </div>
+                                    
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="form-group">
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" style="height: 25px;"><i class="fa fa-mobile"></i></span>
+                                          </div>
+                                          {{ form.tlfmovil }}
+                                          <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                
+                                <div class="row">
+                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div style="text-align:center; font-size: 14px;">
+                                      <label class="control-label text-muted" style="margin-bottom: -1px;">Mision</label>
+                                      {{ form.mision }}
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div style="text-align:center; font-size: 14px;">
+                                      <label class="control-label text-muted" style="margin-bottom: -1px;">Vision</label>
+                                      {{ form.vision }}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                  
+                                  <div class="form-group"> 
+                                    <label for="email" class="text-muted" style="margin-bottom: -1px;">Email</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fa fa-envelope"></i></span>
+                                      </div>
+                                      {{ form.email }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="web" class="text-muted" style="margin-bottom: -1px;">Pagina Web</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fa fa-id-card"></i></span>
+                                      </div>
+                                      {{ form.web }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="instagram" class="text-muted" style="margin-bottom: -1px;">Instagram</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fab fa-instagram"></i></span>
+                                      </div>
+                                      {{ form.instagram }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="facebook" class="text-muted" style="margin-bottom: -1px;">Facebook</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fab fa-facebook"></i></span>
+                                      </div>
+                                      {{ form.facebook }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="telegram" class="text-muted" style="margin-bottom: -1px;">Telegram</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fab fa-telegram"></i></span>
+                                      </div>
+                                      {{ form.telegram }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="whatsapp" class="text-muted" style="margin-bottom: -1px;">Whatsapp</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fab fa-whatsapp"></i></span>
+                                      </div>
+                                      {{ form.whatsapp }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="margin-top: -10px;"> 
+                                    <label for="twitter" class="text-muted" style="margin-bottom: -1px;">Twitter</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" style="height: 25px;"><i class="fab fa-twitter"></i></span>
+                                      </div>
+                                      {{ form.twitter }}
+                                      <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask> -->
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="col-sm-3 p-0 pt-1 mr-0">
+                                  
+                                {% if object.logo %}
+                                  <div class="mt-3 text-center">
+                                    <label class="text-muted">Logo de la Empresa </label>
+                                    <img src="{{object.logo.url}}" class="img-fluid" alt="Imagen" name="imagenPrevisualizacion" id="imagenPrevisualizacion" height="200px" width="200px">
+                                    {{form.logo}}
+                                  </div>
+                                  {% else %}
+                                    <div style="font-size: 12px;" class="form-file mt-3 text-center">
+                                      {{form.logo}}
+                                      <img src="/media/logo/Imagen1.jpg"  class="img-fluid" name="imagenPrevisualizacion" id="imagenPrevisualizacion" style="margin-top: 10px; margin-bottom: 10px;" height="200px" width="200px">
+                                      <label class="form-file-label" for="customFile">
+                                        <span class="form-file-text">{{form.logo.label|upper}}</span>
+                                        <span class="form-file-button">Buscar</span>
+                                      </label>
+                                    </div>
+                                  {% endif %}
+
+                                </div>
+
+                              </div>
+
+                            </div>
+                            <!-- 2da Pestaña Datos adivionales -->
+                            <div class="tab-pane fade" id="nav-datosadicio" role="tabpanel" aria-labelledby="nav-datosadicio-tab">
+                              <div class="row mt-4">
+                                <div class="col-12">
+                                  <fieldset style="height:90px; border: 1px solid #ebe8e8; border-radius: 6px;">
+                                    <legend class="px-4 ml-4" style="width: 30%; font-size: 14px; border: 1px solid #ebe8e8; border-radius: 4px; background-color: #eeeeee;"> Datos de la Empresa</legend>
+                                      <label for="datosempresa" id="datosempresa" class="control-label text-muted" style="margin: 10px;"></label>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <div class="row mt-4">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                  <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group input-group-sm">
+                                          <label for="ced_repre" class="control-label text-muted" style="margin-bottom: -1px;">Doc. Representante</label>
+                                          {{form.ced_repre}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="representante" class="control-label text-muted" style="margin-bottom: -1px;">Nombre Representante</label>
+                                        {{form.representante}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group input-group-sm">
+                                          <label for="ced_ctadante" class="control-label text-muted" style="margin-bottom: -1px;">Doc. Cta Dante</label>
+                                          {{form.ced_ctadante}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="cuentadante" class="control-label text-muted" style="margin-bottom: -1px;">Nombre cuentadante</label>
+                                        {{form.cuentadante}}
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            </div>
+
+                             <!-- 3ra Pestaña Ajustes y Parametros -->
+                            <div class="tab-pane fade" id="nav-ajustes" role="tabpanel" aria-labelledby="nav-ajustes-tab">
+                              <div class="row mt-4">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="nombimpuesto" class="text-muted" style="margin-bottom: -1px;">Iniciales Impuesto</label>
+                                          {{ form.nameimpuesto }}
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="form-group input-group-sm">
+                                        <label for="iva" class="text-muted" style="margin-bottom: -1px;">IVA %</label>
+                                          {{ form.iva }}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group m-0 pt-0">
+                                    <div class="custom-control custom-checkbox">
+                                        {{ form.multialmacen }}
+                                      <label for="idmultialmacen" class="custom-control-label" style="padding-top: 5px;">Multi Almacen</label>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <fieldset style="height:90px; border: 1px solid #ebe8e8; border-radius: 6px;">
+                                    <legend class="px-4 ml-4" style="width: 60%; font-size: 14px; border: 1px solid #ebe8e8; border-radius: 4px; background-color: #eeeeee;"> Numeración Documentos</legend>
+                                      <label for="numdocu" id="numdocu" class="control-label text-muted" style="margin: 10px;">dfhsdfhdsf sdfhgsdfg sdfgsdfgsdfgsdfgsdfgsdf sdfgsdfg sdfgsdfgsdfgsdfg sdfgsdfg</label>
+                                  </fieldset>
+                                </div>
+                              </div>
+                          </div>
+                      </div> 
+                    </div>
+                  </div>
+                  </div>
+            <br>
+            <div class="card-footer py-1 text-center" style="background-color: #EFEBE9;">
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-secondary btn-sm ml-4 btnClear"><i class="fas fa-save"></i> Limpiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Inventario x Desincorporación en Unidad</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            /*sup derecho  inferior  izquierdo */
+            margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+            ;
+        }
+
+        body {
+            font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            color: black;
+        }
+
+        .name-company {
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .tblguiapdf {
+            padding: 1px;
+        }
+        .tblguiapdf thead tr  {
+            vertical-align: middle !important;
+            border: 1px solid #424242 !important;
+            padding: 3px;
+           /*  border-bottom: 0px;*/
+            
+            /*  border-color: black; */
+        }
+
+        .tblguiapdf tbody tr td {
+            vertical-align: middle !important;
+            border: 1px solid #424242;
+            padding: 3px;
+            border-bottom: 0px;
+            border-top: 0px;
+            /*border-color: #141414;
+
+
+            /* border-left: 0px;
+            border-right: 0px; */
+
+        }
+        .tblguiapdf tfoot tr td {
+            border: 1px solid #424242;
+            padding: 3px;
+
+            /*border-color: #141414;
+
+
+            /* border-left: 0px;
+            border-right: 0px; */
+
+        }
+
+        .img-logo {
+            margin-top: 10px;
+            width: 700px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+<body>
+    <!-- rounded-pill -->
+    <!-- 'comp': {'name': 'Dirección Regional de Salud Portuguesa', 'rif': 'G-20008795-1', 'tlf': '(0257) - 2531550 - 2512246 - 2534014',
+    'redsocial': 'http://saludportuguesa.gob.ve; twitter: @saludportuguesa', 'address': 'Carrera 3 con calle 09 Antiguo Hospital, Sector Curazao Guanare Portuguesa Venezuela'}, -->
+    <div class="container-fluid border border-dark pl-0 pr-0" style="height: 750px; width: 1070px; border-radius:10px;">
+        <img src="{% static 'img/newlogompps.png' %}" class="img-fluid d-block mx-auto img-logo">
+        <h1 class="name-company">{{ comp.name }}</h1>
+        <p class="text-center" style="font-size: 14px;">
+            {{ comp.address }}<br>
+            RIF: {{ comp.rif }} ==> {{ comp.tlf }}<br>
+            Redes Sociales:  {{ comp.redsocial }}<br>
+        </p>
+
+        <p class="text-center" style="font-size: 14px;">
+                Guia de Desincorporación en Unidad: <span style="font-weight: bold;">{{ encab_desinc.origen.nombre }}</span>
+        </p>
+        <div class="row p-0 mb-0">
+            <div class="col-3 p-0 float-right ml-3">
+                <div class="form-group clearfix">
+                    <div class="d-inline">
+                        <span style="font-weight: bold; margin-left: 10px;">CODIGO: </span>  <span class="rounded-pill" style="background-color: #eeeeee; font-size: 14px; color: red; text-align: center; padding: 6px;"> {{ encab_desinc.cod_desinc }} </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-0" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+              <div class="form-group clearfix">
+                <div class="d-inline">
+                    <span style="font-weight: bold;">Fecha: </span> {{ encab_desinc.fecha_desinc }}
+                </div>
+                <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Tipo Desincorporación: </span> {{ encab_desinc.tipo_desinc }}
+                 </div>
+                 <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Usuario: </span> {{ encab_desinc.usuario }}
+                </div>
+                 
+                 <div class="d-inline" style="margin-left: 20px;">
+                    <span style="font-weight: bold;">Nº Items: </span>  {{ detalle_desinc.count }}
+                 </div>
+
+              </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 11px; margin-left: 10px; margin-top: -12px;">
+            <div class="col-12 p-0">
+                <div class="form-group clearfix">
+                  <div class="d-inline">
+                      <span style="font-weight: bold;">Origen: </span> {{ encab_desinc.origen.nombre }}
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 11px; margin-left: -6px; margin-top: -12px; margin-bottom: 10px;">
+            <div class="col-sm-8">
+                <div class="input-group input-group-sm">
+                    <span style="font-weight: bold;">Observación: </span>
+                    <div class="input-group">
+                        {{ encab_desinc.observ }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <table class="tblguiapdf table" cellpadding="0" cellspacing="0" style="font-size: 10px;">
+            <thead>
+                <tr style="text-align: center;  border: #030303">
+                    <th style="width: 170px;">DEPARTAMENTO</th>                    
+                    <th style="width: 80px;">COD. BIEN</th>
+                    <th style="width: 268px;">PRODUCTO</th>
+                    <th style="width: 240px;">DESCRIPCION</th>
+                    <th style="width: 65px;">PRECIO</th>
+                    <th style="width: 65px;">SUB-TOTAL</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for det in detalle_desinc %}
+                <tr>
+                    <td>{{ det.codubica.nombre }}</td>                   
+                    <td class="text-center">{{ det.codbien.codbien }}</td>
+                    <td>{{ det.prod.codigo }} - {{ det.prod.nombre }}</td>
+                    <td>{{ det.prod.descripcion }} - {{ det.prod.marca }}</td>
+                    <td class="text-right">{{ det.precio|floatformat:2 }}</td>
+                    <td class="text-right">{{ det.subtotal|floatformat:2 }}</td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-right" style="border-bottom: 0px;"><b>Subtotal</b></td>
+                    <td class="text-right">{{ encab_desinc.subtotal|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-right" style="border-top: 0px; border-bottom: 0px;"><b>Iva %</b></td>
+                    <td class="text-right">{{ encab_desinc.iva|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-right" style="border-top: 0px;"><b>Total</b></td>
+                    <td class="text-right">{{ encab_desinc.total|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <br>
+                        <span style="font-weight: bold; margin-left: 150px;">Firmas conforme; </span><br>
+                        <div class="row ml-3 pt-4" style="padding-bottom: 12px;">
+                            <div class="col-4 pt-2" style="margin-left: 80px;">
+                                <div class="input-group input-group-sm">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Unidad Solicitante </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-4 pt-2" style="margin-left: 80px;">
+                                <div class="input-group input-group-sm ml-4">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Direcc. Adm. y Serv. </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-4 pt-2" style="margin-left: 80px;"> 
+                                <div class="input-group input-group-sm ml-4">
+                                    <span style="font-weight: bold; margin-bottom: 12px;">Coord. Bienes Nacionales </span>
+                                    <div class="input-group">
+                                       __________________________
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <br>
+                        <!-- <p class="text-uppercase font-weight-bold text-center" style="font-size: 8px;">
+                            Total de productos {{ detalle_distrib.count }}<br>
+
+                        </p> -->
+                    </td>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    </div>
+    </body>
+    </html>

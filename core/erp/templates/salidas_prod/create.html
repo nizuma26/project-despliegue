@@ -1,0 +1,361 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head_form %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/jquery-ui/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'salida_prod/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_pagination.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<form id="frmSalidaprod" method="post" style="font-size: 11px;">
+    <div class="card main_border_top">
+        {% csrf_token %}
+        <div class="card-body pt-3">
+            <input type="hidden" name="action" value="{{action}}">
+            <input type="hidden" name="url" value="{{url}}">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group input-group-sm">
+                        <label for="codigo" class="text-muted" style="margin-bottom: 0px;">CÓDIGO</label>
+                        {{form.cod_salida|attr:"autocomplete:off"}}
+
+                        {% for error in form.cod_salida.errors %}
+                            <p class="cell alert alert-danger">
+                                {{ error|escape }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="tipo_salida" class="text-muted" style="margin-bottom: 0px;">TIPO DE DISTRIBUCIÓN:</label>
+                        <div class="input-group">
+                            {{ form.tipo_salida }}
+                            <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm btnAddConcep btn-flat" type="button" style="height: 29px;">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            </div>
+                        </div>                        
+                    </div>                    
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="tipo_comprob" class="text-muted" style="margin-bottom: 0px;">TIPO DE COMPROBANTE</label>
+                            {{ form.tipo_comprob }}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="num_comprob" class="text-muted" style="margin-bottom: 0px;">Nº COMPROBANTE</label>
+                            {{ form.num_comprob }}
+                            
+                    </div>
+                   
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <label for="fecha_salida" class="text-muted" style="margin-bottom: 0px;">FECHA:</label>
+                        <div class="input-group date" id="fecha_salida" data-target-input="nearest">
+                            {{ form.fecha_salida }}
+                            <div class="input-group-append" data-target="#fecha_salida" data-toggle="datetimepicker">                                
+                                <div class="input-group-text input-flat p-0 m-0" style="width: 25px; height: 28px;"><i class="far fa-calendar-alt m-auto"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input-group-sm m-0">
+                            <label for="origen" class="text-muted" style="margin-bottom: 0px;"> ORIGEN</label>
+                            {% if action == 'edit' %}
+
+                            {{ form.origen|attr:"disabled:true" }}
+
+                            {% else %}
+
+                            {{ form.origen }}
+
+                            {% endif %}
+                        </div>
+                    </div>
+
+                <div class="col-md-6">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="destino" class="text-muted" style="margin-bottom: 0px;"> DESTINO:</label>
+                        <div class="input-group">                            
+                            {{ form.destino }}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm btnAddDestino btn-flat" type="button" style="height: 30px;">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-3 my-auto p-0 m-0" style="text-align: right; font-size: 11px;"><span class="font-weight-bold text-muted">REPRESENTANTE:</span> </div>
+                        <div class="col-sm-9">{{ form.respon_origen|attr:"readonly:true" }}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-3 my-auto p-0 m-0" style="text-align: right; font-size: 11px;"><span class="font-weight-bold text-muted">REPRESENTANTE:</span> </div>
+                        <div class="col-sm-9">{{ form.respon_destino|attr:"readonly:true" }}</div>
+                    </div>
+                     
+                </div>
+                
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-8 text-center align-items-center justify-content-center">
+                    <div class="input-group input-group-sm">
+                        <label for="observ" class="text-muted" style="margin-bottom: 0px;">OBSERVACIÓN:</label>
+                        <div class="input-group">
+                            {{ form.observ }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="estado" class="text-muted" style="margin-bottom: 0px;"> ESTADO:</label>
+                        <div class="input-group" style="height: 28px">                        
+                            {{ form.estado }}
+                        </div>
+                    </div>
+                </div>     
+            </div>
+        </div>       
+        <div class="row pt-1">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                <div id="dist_bienes_muebles" class="collapse">
+                    <div class="card mb-0 input-flat elevation-0 main_border_top">
+                        <div class="card-header" style="background-color: #f5f5f5; padding: 5px 0px 3px 10px; font-size: 16px;">
+                            <b style="color: #181e30b3;"><i class="fa fa-cart-plus"></i> Detalle de la Distribución</b>       
+                          </div> 
+                        <div class="card-body" style="padding: 14px 10px 10px 10px;"> 
+                            <div class="content_search_bsm">
+                                <label for="buscador" style="margin-bottom: 0px;" class="text-muted mt-1"><i class="fas fa-search"></i> BUSQUEDA DE PRODUCTOS</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-control select2 input-flat" name="search"></select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle btn-flat" type="button"
+                                        data-toggle="dropdown" style="height: 30px;"><i class="fas fa-tasks"></i>                                    
+                                    </button>
+                                    <div class="dropdown-menu border-0 shadow dropdown-menu-right">
+                                        <a class="dropdown-item btnSearchProducSal">
+                                            <i class="fas fa-search"></i> Buscar productos
+                                        </a>                                    
+                                        <a class="dropdown-item btnRemoveAll">
+                                            <i class="fas fa-trash"></i> Eliminar todos mis items
+                                        </a>
+                                    </div>                                
+                                    </div>
+                                </div> 
+                            </div>
+                                <div class="table-wrapper">
+                                    <table class="table max-cont table-hover table-sm" style="width:100%; font-size: 11px; margin-left: 0px; margin-right: 0px" id="tblSalProducts">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="width: 4%;"class="m-auto"><i class="fas fa-trash"></i></th>
+                                                <th class="sticky" scope="col" style="width: 29%;">PRODUCTO</th>
+                                                <th scope="col" style="width: 9%;">STOCK</th>
+                                                <th scope="col" style="width: 10%;">PRECIO</th>
+                                                <th scope="col" style="width: 12%;">SUBTOTAL</th>
+                                                <th scope="col" style="width: 12%;">CODIGO DE BIEN</th>
+                                                <th scope="col" style="width: 21%;">UBICACIÓN FÍSICA <a class="btn btn-primary btn-xs ml-4 btnAddUbicaF" style="font-size: 9px;"><i class="fa fa-plus" style="color: white;"></i></a></th>
+                                                <th scope="col" style="width: 3%;">fila</th>                                   
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 11px;">
+            
+                                        </tbody>
+                                    </table>
+                                </div>   
+                                                  
+                        </div>
+                        <div class="row" style="margin-top: 3px; margin-left: 0px; margin-right: 0px;">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>SUBTOTAL</b></span>
+                                    </div>
+                                    {{ form.subtotal }}
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>{{iva.nameimpuesto}}%</b></span>
+                                    </div>
+                                    <input type="text" class="form-control input-flat" style="height: 27px; font-size: 15px;" readonly name="iva" id="idiva" value= "{{ iva.iva|safe}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>IVA CALCULADO</b></span>
+                                    </div>
+                                    <input type="text" class="form-control input-flat" style="height: 27px;" readonly name="ivacalc" value="0.00">
+                                </div>
+    
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>TOTAL</b></span>
+                                    </div>
+                                    {{ form.total }}
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div id="dist_suministros" class="collapse">
+                    <div class="card mb-0 input-flat elevation-0 main_border_top">
+                        <div class="card-header" style="background-color: #f5f5f5; padding: 5px 0px 3px 10px; font-size: 16px;">
+                            <b style="color: #181e30b3;"><i class="fa fa-cart-plus"></i> Detalle de la Distribución</b>       
+                          </div> 
+                        <div class="card-body" style="padding: 14px 10px 10px 10px;">
+                            <div class="content_search_mtc">
+                                <label for="buscador" style="margin-bottom: 0px;" class="text-muted"><i class="fas fa-search"></i> BUSQUEDA DE PRODUCTOS</label>                    
+                                <div class="input-group mb-3">                            
+                                    <select class="form-control select2 input-flat" name="search2"></select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle btn-flat" type="button"
+                                        data-toggle="dropdown" style="height: 30px;"><i class="fas fa-tasks"></i>                                    
+                                    </button>
+                                    <div class="dropdown-menu border-0 shadow dropdown-menu-right">
+                                        <a class="dropdown-item btnSearchSuminist">
+                                            <i class="fas fa-search"></i> Buscar productos
+                                        </a>                                    
+                                        <a class="dropdown-item btnRemoveAll2">
+                                            <i class="fas fa-trash"></i> Eliminar todos mis items
+                                        </a>
+                                    </div>                                
+                                    </div>
+                                </div> 
+                            </div>                                     
+                            <div class="scroll-h">
+                                <div class="table-wrapper">
+                                    <table class="table max-cont table-sm" style="width:100%; font-size: 11px; margin-left: 0px; margin-right: 0px" id="tblSalSuministros">
+                                        <thead>
+                                            <tr style="font-size: 10px;">
+                                                <th scope="col" style="width: 2%;"class="m-auto"><i class="fas fa-trash"></i></th>
+                                                <th scope="col" style="width: 8%;">CODIGO</th>
+                                                <th scope="col" style="width: 29%;">PRODUCTO</th>
+                                                <th scope="col" style="width: 10%;">STOCK</th>
+                                                <th scope="col" style="width: 14%;">PRECIO</th>
+                                                <th scope="col" style="width: 10%;">CANTIDAD</th>
+                                                <th scope="col" style="width: 8%;">SUBTOTAL</th>
+                                                <th scope="col" style="width: 9%;">LOTE</th>
+                                                <th scope="col" style="width: 9%;">FECHA_VENC</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 11px;">
+            
+                                        </tbody>
+                                    </table>
+                                </div>  
+                            </div>                              
+                        </div>
+                        <div class="row" style="margin-top: 3px; margin-left: 0px; margin-right: 0px;">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>SUBTOTAL</b></span>
+                                    </div>
+                                    {{ form.subtotal }}
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>{{iva.nameimpuesto}}%</b></span>
+                                    </div>
+                                    <input type="text" class="form-control input-flat" style="height: 27px; font-size: 15px;" readonly name="iva" id="idiva" value= "{{ iva.iva|safe}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>IVA CALCULADO</b></span>
+                                    </div>
+                                    <input type="text" class="form-control input-flat" style="height: 27px;" readonly name="ivacalc" value="0.00">
+                                </div>
+    
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend" style="height: 27px;">
+                                    <span class="input-group-text input-flat" style="font-size: 14px;"><b>TOTAL</b></span>
+                                    </div>
+                                    {{ form.total }}
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>   
+                </div>                                                             
+            </div>
+        </div>
+        <div class="card-footer mt-3 py-2">            
+            <button type="submit" class="btn btn-primary btn-bord">
+               <i class="fas fa-save"></i> Guardar registro
+            </button>
+           <a href="{{ list_url }}" class="btn btn-out ml-2">
+           <i class="fas fa-times"></i> Cancelar
+           </a>
+        </div> 
+       
+    </div>
+    
+    
+</form>
+
+<div id="mostrarmodalUnidad">
+    {% include 'unidad/form_modal_unidad.html' %}
+</div>
+<div id="mostrarmodalproductos">
+    {% include './catalogo_bienes_muebles.html' %}
+</div>
+<div id="mostrarmodalsuministros">
+    {% include './catalogo_material_consumible.html' %}
+</div>
+<div id="mostrarmodalubicacionf">
+    {% include 'depart/modal_adddepart.html' %}
+</div>
+<div id="mostrarmodalbienes">
+    {% include './tipo_bienes.html' %}
+</div>
+<div id="mostrarmodalconcepmov">
+    {% include 'concepmov/modal_addconcepmov.html' %}
+</div>
+    
+{% endblock %}
+
+{% block javascript_form %}
+    <script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-bs4/js/dataTables.bootstrap4.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/moment/moment-with-locales.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'salida_prod/js/form.js' %}" type="text/javascript"></script>
+{% endblock %}

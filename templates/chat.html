@@ -1,0 +1,43 @@
+{% load static %}
+<div id="button-show">
+  <button type="button" class="chatbot-toggler">
+    <span class="fas fa-comments"></span>
+    <span class="fas fa-times"></span>
+  </button>
+</div>
+<div class="chatbot">
+  <header>
+    <img id="src_img" src="{{request.user.get_image}}" class="img-profile" alt="" />
+    <h6 id="full_name">Chat</h6>
+    <button type="button" class="btn_header users_list">
+      <i class="fas fa-users"></i>
+    </button>
+    <button type="button" class="btn_header btn-expand">
+      <i class="fas fa-expand icon-expand"></i>
+    </button>
+    <span class="close-btn"><i class="fas fa-times"></i></span>
+  </header>
+  <div class="home" id="home">
+    <input class="form-control mb-1 filter_users" type="search" placeholder="Filtrar..." aria-label="Search" oninput="filterUsers(this.value)">
+    <ul class="users_container">
+        <!-- <li class="card_user users" data-id="{{user_data.id}}" onclick="activateRadio(this.getAttribute('data-id'))">
+          <a>
+            <img src="{{ user_data.image }}" id="img_user" alt="User Image">
+            <span id="username">{{ user_data.full_name }}</span>
+            <span class="online"></span>
+            <input type="radio" class="d-none" name="user_id" value="{{user_data.id}}">
+          </a>
+        </li> -->
+    </ul>
+  </div>
+  <div id="message" class="content_message" style="display: none;">
+    <ul class="chatbox" id="message_list">
+      
+    </ul>
+    <div class="chat-input">
+      <textarea placeholder="Escribe un mensaje..." spellcheck="false"></textarea>
+      <span class="send_btn"><i class="fas fa-paper-plane"></i></span>
+      <span class="cancel_update d-none"><i class="fas fa-times f-13"></i></span>
+    </div>
+  </div>
+</div>

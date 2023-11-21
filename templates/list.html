@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'lib/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/table.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom_pagination.css' %}">
+
+    {% block head_list %}
+
+    {% endblock %}
+
+{% endblock %}
+
+{% block title %}
+<div class="col-sm-6 mb-1">
+  <h5 class="text-dark title-form">
+    <span class="badge badge-rounded main_theme"><i class="fas fa-search"></i></span>
+      <span style="vertical-align: middle;">{{ title }}</span>
+  </h5>
+</div>
+{% endblock title %}
+
+{% block content %}
+    <div class="row fade_down_animation">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card main_border_top">
+                <!-- <div class="card-header py-1" style="background-color: #3b8fe4;">
+                </div> -->
+                <div class="card-body pl-3 pr-3">
+                    <div> 
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="container-fluid">
+                                    {% block content_list_before %}{% endblock %}
+                                    <div class="scroll-h">
+                                        <table id="data_list" class="table table-hover max-cont table-sm" width="100%">
+                                            <thead class="text-uppercase">
+                                                {% block columns %}
+                    
+                                                {% endblock %}
+                                            </thead>
+                                            <tbody style="font-size: .696rem;">
+                                                {% block rows %}
+                    
+                                                {% endblock %}
+                                            </tbody>
+                                        </table>
+                                    </div>                                    
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
+
+                {% block add_modales %}
+                
+                {% endblock %}
+            </div>
+        </div>
+    </div>   
+  {% endblock %}
+  {% block javascript %}
+    <script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-bs4/js/dataTables.bootstrap4.min.js' %}" type="text/javascript"></script>
+    {% block javascript_list %}
+
+    {% endblock %}
+    
+  {% endblock %}
+ <!-- datatables -->
+ 
+

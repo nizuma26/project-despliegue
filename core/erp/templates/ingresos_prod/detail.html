@@ -1,0 +1,142 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'movimientos/css/detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card main_border_top f-12">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">TIPO DE INCORPORACIÓN</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.tipo_ingreso }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">TIPO DE COMPROBANTE</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.get_tipo_comprob_display }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">Nº DE COMPROBANTE</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.num_comprob }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">FECHA</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.fecha_ingreso }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">ALMACÉN</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.almacen.nombre }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">PROVEEDOR</label>
+                            <div class="input-group input-group-sm m-0">
+                                {% if object.proveedor %}
+                                    Sin proveedor
+                                {% else %}
+                                    {{ object.proveedor.empresa }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-4">
+                            <label class="text-muted mb-1">ESTADO</label>
+                            <div class="input-group input-group-sm m-0 status">
+                                {{ object.get_estado_display }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm m-0">
+                            <label class="text-muted mb-1">DESCRIPCIÓN:</label>
+                            <div class="input-group input-group-sm m-0">
+                                {{ object.observ }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrapper">
+                            <table class="table table-hover max-cont table-sm" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">CÓDIGO</th>
+                                        <th style="width: 42%;">PRODUCTO</th>
+                                        <th style="width: 12%;">PRECIO</th>
+                                        <th style="width: 14%;" class="text-center">CANTIDAD</th>
+                                        <th style="width: 8%;" class="text-center">IVA</th>
+                                        <th style="width: 14%;" class="text-center">SUBTOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: 11px;">
+                                    {% for i in det %}
+                                    <tr>
+                                        <td>{{ i.code }}</td>
+                                        <td>{{ i.full_name }}</td>
+                                        <td>{{ i.precio }}</td>
+                                        <td class="text-center">{{ i.cantidad }}</td>
+                                        <td class="text-center">{{ i.iva }}</td>
+                                        <td class="text-center">{{ i.subtotal }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                {% if perms.aprobaciones.approve_movimientos and object.get_estado_display == 'Por aprobar' %}
+                    <button type="button" class="btn btn-primary btn-bord status_change">
+                        <i class="fas fa-file-signature"></i> Gestionar Movimiento
+                    </button>
+                {% endif %}
+                {% if object.get_estado_display != 'En creación' and object.get_estado_display != 'Por aprobar' and motive %}
+                    <button type="button" class="btn btn-primary btn-bord" data-toggle="modal" data-target="#modalMotive">
+                        Ver Motivo
+                    </button>
+                {% endif %}
+                <a href="{{ list_url }}" class="btn btn-out">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+            {% include 'approve/approve.html' %}
+            {% include 'motive/motive.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'approve/manage_state.js' %}" type="text/javascript"></script>
+{% endblock javascript %}

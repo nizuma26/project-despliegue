@@ -1,0 +1,518 @@
+{% load static %}
+<aside id="sidebar_control" nav-link-theme="{{customize.nav_link_theme}}" class="main-sidebar {{customize.sidebar_theme}} shadow">
+  <a class="brand-link logo_theme" id="brand_logo" brand-logo-theme="{{customize.brand_logo_theme}}">          
+      <span class="brand-text font-weight-light font-weight-normal ss">
+        <i class="fab fa-magento ml-3 mr-1"></i> StockManager
+      </span>
+  </a>
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-2 d-flex">
+      <div class="image">
+         <img src="{{request.user.get_image}}" class="img-circle elevation-1" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="{% url 'user:user_profile' %}" class="d-block">{{ request.user.get_full_name }}</a> 
+      </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2" style="font-size: 0.895rem;">
+      <ul class="nav nav-pills {{customize.sidebar_nav}} nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+        <li class="nav-header mr-2">Menú</li>
+        <li class="nav-item">
+          <a href="{% url 'index_app:Index' %}" class="nav-link"><i class="fas fa-house-user"></i> <p class="ml-1">Inicio</p> </a>
+        </li>   
+        {% if perms.erp.view_almacen or perms.erp.view_categoria or perms.erp.view_marca or perms.erp.view_modelo or perms.erp.view_producto or perms.erp.view_grupoctabienes or perms.erp.view_subgrupoctabienes or perms.erp.view_codbienes %}       
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-boxes"></i>
+              <p class="ml-1">
+                Inventario
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">
+              {% if perms.erp.view_producto %}
+              <li class="nav-item">
+                  <a href="{% url 'erp:product_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i> 
+                    <p class="ml-1"> Catálogo</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_almacen %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:almacen_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i> 
+                     <p class="ml-1"> Almacén</p>
+                  </a>
+                </li>
+              {% endif %}              
+              {% if perms.erp.view_controlstock %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:stock_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">Control de Stock</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_categoria %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:category_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">Categorias</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_marca %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:marca_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">Marca</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_modelo %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:modelo_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">Modelo</p>
+                  </a>
+                </li>
+              {% endif %}              
+              {% if perms.erp.view_grupoctabienes %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:grupo_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">Grupo de Productos</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_subgrupoctabienes %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:subgrupo_list' %}" class="nav-link">
+                    <i class="far fa-circle f-12"></i>
+                    <p class="ml-1">SubGrupos</p>
+                  </a>
+                </li>
+              {% endif %}                       
+            </ul>
+          </li>
+          {% endif %}                   
+          {% if perms.erp.view_concepmovimiento or perms.erp.view_ingresoproduc or perms.erp.view_salidaproduc or perms.erp.view_desincalmacen or perms.erp.view_trasladoproduc or perms.erp.view_desincproduc %}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-sitemap"></i>
+              <p class="ml-1">
+                Movimientos
+              <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">
+              {% if perms.erp.view_concepmovimiento %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:concepto_list' %}" class="nav-link">
+                    <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                    <p>Conceptos de Movimientos</p>
+                  </a>
+                </li>
+              {% endif %}
+              <li class="nav-item">              
+              </li>
+              {% if perms.erp.view_ingresoproduc or perms.erp.view_salidaproduc or perms.erp.view_desincalmacen %}                       
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-minus" style="font-size: 11px;"></i>
+                    <p>En Almacén</p>
+                      <i class="fas fa-angle-left right"></i>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    {% if perms.erp.view_ingresoproduc %}
+                      <li class="nav-item">
+                        <a href="{% url 'erp:ingreso_list' %}" class="nav-link">
+                          <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                          <p>Incorporación de Producto</p>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if perms.erp.view_salidaproduc %}                
+                      <li class="nav-item">
+                        <a href="{% url 'erp:salida_list' %}" class="nav-link">
+                          <i class="fas fa-caret-right ml-1" style="color:#1389e9"></i>
+                          <p>Distribución de Bienes Muebles</p>
+                        </a>
+                      </li>
+                    {% endif %}                   
+                    {% if perms.erp.view_desincalmacen %}
+                      <li class="nav-item">
+                        <a href="{% url 'erp:desincorp_list' %}" class="nav-link">
+                          <i class="fas fa-caret-right ml-1" style="color:#2196F3"> </i>
+                          <p>Desincorporación de Producto</p>
+                        </a>                      
+                      </li>
+                    {% endif %}
+                  </ul>
+                </li>
+              {% endif %}
+              {% if perms.erp.view_trasladoproduc or perms.erp.view_desincproduc %}               
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-minus" style="font-size: 11px;"></i>
+                    <p>En Unidad</p>
+                      <i class="fas fa-angle-left right"></i>
+                  </a>                  
+                  <ul class="nav nav-treeview">
+                    {% if perms.erp.view_trasladoproduc %}
+                      <li class="nav-item">                        
+                        <a href="{% url 'erp:traslado_list' %}" class="nav-link">
+                          <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                          <p>Traslado de Producto</p>
+                        </a>
+                      </li>
+                    {% endif %}
+                    {% if perms.erp.view_desincproduc %}
+                      <li class="nav-item">                        
+                        <a href="{% url 'erp:desinc_list' %}" class="nav-link">
+                          <i class="fas fa-caret-right" style="color:#2196F3"> </i>
+                          <p>Desincorporación de Producto</p>
+                        </a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </li>
+              {% endif %}            
+            </ul>
+          </li>
+        {% endif %}
+        {% if perms.erp.view_codbienes %}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-code"></i>
+            <p class="ml-1">
+              Código de Bienes
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview text-sm">
+            <li class="nav-item">
+              <a href="{% url 'erp:codbien_list' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                  <p>Código de Bienes</p>
+              </a>
+            </li>                                  
+          </ul>           
+        </li>
+        {% endif %}  
+        {% if perms.erp.view_unidad or perms.erp.view_departamento or perms.erp.view_proveedor %}       
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-address-card"></i>
+              <p class="ml-1">
+                Contactos
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">
+            {% if perms.erp.view_unidad %}
+              <li class="nav-item">
+                <a href="{% url 'erp:unidad_list' %}" class="nav-link">
+                  <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                  Unidad - Dependencia
+                </a>
+              </li>
+            {% endif %}
+            {% if perms.erp.view_departamento %}
+              <li class="nav-item">
+                <a href="{% url 'erp:depart_list' %}" class="nav-link">
+                  <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                  <p>Departamentos</p>
+                </a>
+              </li>
+            {% endif %}
+            {% if perms.erp.view_proveedor %}
+              <li class="nav-item">
+                <a href="{% url 'erp:proveedor_list' %}" class="nav-link">
+                  <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                  <span>Proveedores</span>
+                </a>
+              </li>
+            {% endif %}              
+            </ul>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-tools"></i>
+            <p class="ml-1">
+              Servicio Técnico
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview text-sm">
+            <li class="nav-item">
+              <a href="{% url 'erp:soporte_list' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                <p>Recepción de Soporte</p>
+              </a>
+            </li>          
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                <p>Historial de Equipos</p>
+              </a>
+            </li>          
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                <p>Técnicos</p>
+              </a>
+            </li>                        
+          </ul>
+        </li>       
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-file-signature"></i>
+            <p class="ml-1">
+              Solicitudes
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview text-sm">                     
+            <li class="nav-item">
+              <a href="{% url 'solicitudes:soporte_list' %}" class="nav-link">
+                <i class="fas fa-angle-right"></i>
+                <p>Servicio Técnico</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'solicitudes:solicitud_list' %}" class="nav-link">
+                <i class="fas fa-angle-right"></i>
+                <p>Solicitud de Movimientos</p>
+              </a>
+            </li>            
+          </ul>          
+          {% if perms.auth.view_solicitudes %}        
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-clipboard-check"></i>
+              <p class="ml-1">
+                Gestion de Aprobaciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                  <p>Movimientos</p>
+                    <i class="fas fa-angle-left right"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_incorporacion_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Incorporaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_distribucion_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Distribuciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_desincorp_almacen_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Desincorporaciones en Almacén</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_traslado_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Traslados</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_desincorp_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Desincorporaciones en Unidad</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                  <p>Solicitudes</p>
+                    <i class="fas fa-angle-left right"></i>
+                </a>
+                <ul class="nav nav-treeview">                  
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_distribucion_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Solicitud de Movimientos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'aprobaciones:aprob_desincorp_almacen_list' %}" class="nav-link">
+                      <i class="fas fa-caret-right" style="color:#2196F3"></i>
+                      <p>Solicitud de Servicio Técnico</p>
+                    </a>
+                  </li>                  
+                </ul>
+              </li>
+            </ul>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-chart-bar"></i>
+            <p class="ml-1">
+              Reportes
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview text-sm">
+            <li class="nav-item">
+              <a href="{% url 'report:ingreso_report' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Incorporaciones</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'report:salida_report' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Distribuciones</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'report:desinc_almacen_report' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Desincorporaciones en Almacen</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'report:traslado_report' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Traslados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'report:desinc_unidad_report' %}" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Desincorporaciones en Unidad</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-caret-right ml-1" style="color:#2196F3"></i>
+                <p>Inventario</p>
+                  <i class="fas fa-angle-left right"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% url 'report:unidad_report' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-1" style="color:#2196F3"> </i>
+                    <p>Inventario en Unidad</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'report:almacen_report' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-1" style="color:#2196F3"> </i>
+                    <p>Inventario en Almacén</p>
+                  </a>
+                </li>
+              </ul>
+            </li>          
+          </ul>
+        </li>
+        {% if perms.user.view_user or perms.auth.view_group %}
+          <li class="nav-item">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-lock"></i>
+              <p class="ml-1">
+                Seguridad
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">              
+              {% if perms.user.view_user %}
+                <li class="nav-item">
+                  <a href="{% url 'user:user_list' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Usuarios</p>
+                  </a>
+                </li>
+              {% endif %}
+              {% if perms.auth.view_group %}
+              <li class="nav-item">
+                <a href="{% url 'group:group_list' %}" class="nav-link">
+                  <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                  <p>Roles / Permisos</p>
+                </a>
+              </li>
+              {% endif %}
+              {% if perms.security.view_access_users %}
+                <li class="nav-item">
+                  <a href="{% url 'security:access_users_list' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Bitácora de Usuarios</p>
+                  </a>
+                </li>
+              {% endif %}                            
+              {% if perms.user.add_user %}              
+                <li class="nav-item">
+                  <a href="{% url 'erp:respaldo_db' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Respaldos</p>
+                  </a>                  
+                </li>
+              {% endif %}
+            </ul>            
+          </li>
+        {% endif %}
+        {% if perms.user.view_moneda or perms.erp.view_empresa %}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <p class="ml-1">
+                Configuración
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview text-sm">                
+              {% if perms.erp.view_empresa %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:empresa_list' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Institución - Empresa</p>
+                  </a>                  
+                </li>                
+              {% endif %}              
+            </ul>
+            <ul class="nav nav-treeview text-sm">                
+              {% if perms.erp.view_empresa %}
+                <li class="nav-item">
+                  <a href="/" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Aplicación</p>
+                  </a>                  
+                </li>                
+              {% endif %}              
+            </ul>
+            <ul class="nav nav-treeview">                
+              {% if perms.erp.view_moneda %}
+                <li class="nav-item">
+                  <a href="{% url 'erp:monedas_list' %}" class="nav-link">
+                    <i class="fas fa-caret-right ml-2" style="color:#2196F3"></i>
+                    <p>Monedas</p>
+                  </a>                  
+                </li>                
+              {% endif %}              
+            </ul>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</aside>

@@ -1,0 +1,234 @@
+{% extends 'componentes/form.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_form %}
+<link rel="stylesheet" href="{% static 'lib/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/jquery-ui/jquery-ui.min.css' %}">
+<link rel="stylesheet" href="{% static 'traslado_prod/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_pagination.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+{% endblock %}
+{% block content %}
+<form id="frmTrasladoprod" method="post" enctype="multipart/form-data" style="font-size: 11px;">
+    <div class="card main_border_top">
+        <div class="card-body">
+            <input type="hidden" name="action" value="{{ action }}">
+            <input type="hidden" name="url" value="{{url}}">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group input-group-sm">
+                        <label for="codigo" class="text-muted mb-1">CODIGO:</label>
+                        {{form.cod_traslado|attr:"autocomplete:off"}}
+
+                        {% for error in form.cod_traslado.errors %}
+                        <p class="cell alert alert-danger">
+                            {{ error|escape }}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="tipo_traslado" class="text-muted mb-1">TIPO DE
+                            TRASLADO:</label>
+                        <div class="input-group">
+                            {{ form.tipo_traslado }}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm btnAddConcep input-flat" type="button"
+                                    style="height: 31px;">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="estado" class="text-muted mb-1"> ESTADO:</label>
+                        <div class="input-group" style="height: 28px">
+                            {{ form.estado }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group input-group-sm">
+                        <label for="fecha_traslado" class="text-muted mb-1">FECHA:</label>
+                        <div class="input-group" id="reservationdate" data-target-input="nearest">
+                            {{ form.fecha_traslado }}
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text input-flat p-0 m-0 bg-simple-c-white"
+                                    style="width: 25px; height: 30px;"><i class="fas fa-calendar-alt m-auto c-blue"></i></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group input-group-sm">
+                        <label for="origen" class="text-muted mb-1">ORIGEN:</label>
+                        {% if action == 'edit' %}
+
+                        {{ form.origen|attr:"disabled:true" }}
+
+                        {% else %}
+
+                        {{ form.origen }}
+
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group input-group-sm m-0">
+                        <label for="destino" class="text-muted mb-1"> DESTINO:</label>
+                        <div class="input-group">                            
+                            {{ form.destino }}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm add_destino input-flat" type="button" style="height: 30px;">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-0">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-3 my-auto p-0 m-0" style="text-align: right; font-size: 11px;"><span
+                                class="font-weight-bold text-muted">REPRESENTANTE:</span> </div>
+                        <div class="col-sm-9">{{ form.respon_origen|attr:"readonly:true" }}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-3 my-auto p-0 m-0" style="text-align: right; font-size: 11px;"><span
+                                class="font-weight-bold text-muted">REPRESENTANTE:</span> </div>
+                        <div class="col-sm-9">{{ form.respon_destino|attr:"readonly:true" }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-8 align-items-center justify-content-center">
+                    <div class="input-group input-group-sm">
+                        <label for="observ" class="text-muted mb-1">OBSERVACIÓN:</label>
+                        <div class="input-group">
+                            {{ form.observ }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <div class="btn-group" style="width: 100%; height: 35px;">
+                        {{form.soportedocum}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 h-100">
+                <div class="card input-flat elevation-0 main_border_top">
+                    <div class="card-header"
+                        style="background-color: #f9f9f9; padding: 8px 0px 5px 10px; font-size: 16px;">
+                        <b class="text-secondary"><i class="fa fa-cart-plus"></i> Detalle del Traslado</b>
+                    </div>
+                    <div class="card-body">
+                        <label for="buscador" class="text-muted mb-1"><i
+                                class="fas fa-search"></i> BUSQUEDA DE PRODUCTOS</label>
+                        <div class="input-group mb-3">
+                            <select class="form-control select2 input-flat" name="search"></select>
+                            <div class="input-group-append">
+                                <div class="custom-dropdown" id="dropdown-content">
+                                    <button class="btn btn-primary input-flat btn-sm" id="dropdown-button"  type="button">
+                                        <i class="fas fa-tasks"></i>
+                                        <i class="fas fa-caret-down f-12 ml-1"></i>
+                                    </button>
+                                    <ul class="dropdown__menu dropdown__left">
+                                        <li class="dropdown__item">
+                                           <a class="dropdown__name searchProducts">  <i class="fas fa-search"></i> Buscar productos</a>
+                                        </li>
+                                        <li class="dropdown__item">
+                                           <a class="dropdown__name btnRemoveAll"><i class="fas fa-trash"></i> Eliminar todos mis items</a>
+                                        </li>
+                                     </ul> 
+                                </div>                               
+                            </div>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="table max-cont table-hover table-sm m-0 p-0"
+                                style="width:100%; font-size: 11px; margin-left: 0px; margin-right: 0px"
+                                id="tblTrasProducts">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 3%;" class="m-auto"><i class="fas fa-trash"></i>
+                                        </th>
+                                        <th scope="col" style="width: 27;">PRODUCTO</th>
+                                        <th scope="col" style="width: 15%;">CATEGORIA</th>
+                                        <th scope="col" style="width: 11%;">CÓDIGO DE BIEN</th>
+                                        <th scope="col" style="width: 22%;">UBICACIÓN FÍSICA DE ORIGEN</th>
+                                        <th scope="col" style="width: 22%;">UBICACIÓN FÍSICA DE DESTINO<a class="btn btn-primary btn-xs ml-4 btnAddUbicaF" style="font-size: 8px;"><i class="fa fa-plus"></i></a></th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: 11px;">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </di>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-bord">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <a href="{{ list_url }}" class="btn btn-sm btn-out ml-2">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
+    </div>
+
+
+</form>
+
+<div id="mostrarmodalUnidad">
+    {% include 'unidad/form_modal_unidad.html' %}
+</div>
+<div id="mostrarmodalproductos">
+    {% include './search_prod.html' %}
+</div>
+<div id="mostrarmodalubicacionf">
+    {% include 'depart/modal_adddepart.html' %}
+</div>
+<div id="mostrarmodalconcepmov">
+    {% include 'concepmov/modal_addconcepmov.html' %}
+</div>
+
+{% endblock %}
+
+{% block javascript_form %}
+<script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/datatables-bs4/js/dataTables.bootstrap4.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/moment/moment-with-locales.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/jquery-ui/jquery-ui.min.js' %}"></script>
+<script src="{% static 'traslado_prod/js/form.js' %}" type="text/javascript"></script>
+<script>
+    $('#reservationdate').datetimepicker({
+        format: 'YYYY-MM-DD',
+        date: moment().format("YYYY-MM-DD"),
+        locale: 'es',
+    });
+    if ($('input[name="action"]').val() === 'edit'){
+        traslados.items.produc_tras = {{ det | safe }};
+    }
+</script>
+{% endblock %}

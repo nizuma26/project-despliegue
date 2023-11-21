@@ -1,0 +1,86 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{% static 'lib/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+{% endblock %}
+{% block columns %}
+    <tr class="f-12">
+        <th scope="col"><label class="checkbox-container"><input type="checkbox" id="checkAll" name="checkAll"><span class="checkmark"></span></label></th>       
+        <th scope="col">CÓDIGO</th>
+        <th scope="col">FECHA</th>
+        <th scope="col">UNIDAD SOLICITANTE</th>
+        <th scope="col">PERSONA SOLICITANTE</th>
+        <th scope="col">PRIORIDAD</th>
+        <th scope="col">TIPO</th>
+        <th scope="col">STATUS</th>
+        <th scope="col">OPCIONES</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+            
+{% endblock %} 
+
+{% block content_list_before %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label><i class="far fa-calendar-alt"></i> Rangos de fechas:</label>
+            <div class="input-group">
+                {{ form.date_range }}
+                <div class="input-group-append">
+                    <div class="custom-dropdown" id="dropdown-content">
+                        <button class="btn btn-primary input-flat dropdown-btn" id="dropdown-button"  type="button">
+                            <i class="fas fa-sort-amount-down"></i>
+                            Filtrar 
+                        </button>
+                        <ul class="dropdown__menu dropdown__right">
+                            <li class="dropdown__item">                              
+                               <a class="dropdown__name btnSearch">  <i class="fas fa-calendar-check"></i> Por rangos de fechas</a>
+                            </li>
+                            <li class="dropdown__item">
+                               <a class="dropdown__name btnSearchAll"><i class="fas fa-globe"></i> Ver todos los registros</a>
+                            </li>
+                         </ul> 
+                    </div>                                             
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="form-group text-secondary">           
+            <div class="custom-dropdown" id="dropdown-actions">
+                <button class="dropdown-btn-2" id="dropdown-button-actions"  type="button">
+                    <i class="fas fa-bolt dropdown__icon"></i>
+                    Acciones Rapidas 
+                    <div class="dropdown__icons">
+                        <i class="fas fa-chevron-down dropdown__arrow"></i>
+                        <i class="fas fa-times dropdown__close"></i>
+                     </div>
+                </button>
+                <ul class="dropdown__menu dropdown__center">                    
+                    <li class="dropdown__item delete">
+                        <a class="dropdown__name"><i class="fas fa-trash dropdown__icon"></i> Eliminar</a>
+                     </li>
+                     <li class="dropdown__item complete">
+                        <a class="dropdown__name"><i class="fas fa-check dropdown__icon"></i> Marcar como completada</a>
+                     </li>
+                 </ul> 
+            </div>   
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+{% block javascript_list %}
+<script src="{% static 'lib/daterangepicker/spanish.js' %}" type="text/javascript"></script>
+<script src="{% static 'lib/daterangepicker/daterangepicker.js' %}" type="text/javascript"></script>
+<script src="{% static 'movimientos/js/list.js' %}" type="text/javascript">  </script>
+<script src="{% static 'js/checkbox.js' %}" type="text/javascript">  </script>
+{% endblock %}
+
+
